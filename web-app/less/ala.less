@@ -1,0 +1,182 @@
+
+// Global values
+// -----------------------------
+@offWhite:              #fffef7;
+@alaOrange:             lighten(#df4a21, 10%);
+@alaOrangeDark:         lighten(#bc2b03, 10%);
+
+
+// Scaffolding
+// -------------------------------
+@bodyBackground:        @offWhite;
+@textColor:             #333a3f;
+@linkColor:             #007fb6; // darken(#08c, 5%);
+@linkColorHover:        darken(@linkColor, 10%);
+@wellBackground:        #f0f0e8;
+@heroUnitBackground:    #e6e6dd;
+@headerGrey:            #3D464B;
+@headerGreyLight:       #353D42;
+@headerGreyDark:        #333a3f;
+@footerBackground:      @wellBackground;
+@footerBackgroundDark:  @heroUnitBackground;
+@footerBorder:          #d1d1d1;
+
+// Overrides for Bootstrap
+// -------------------------------
+.nav > li > a:hover {
+    text-decoration: none;
+    background-color: darken(@wellBackground, 10%);
+}
+
+// Sprite icons path
+// -------------------------
+@iconSpritePath:          "../images/glyphicons-halflings.png";
+@iconWhiteSpritePath:     "../images/glyphicons-halflings-white.png";
+
+
+// ALA Header
+// -------------------------------
+#site-header {
+    margin-bottom: 0px;
+    .navbar-inner {
+        min-height: 56px;
+        #gradient .vertical(@headerGrey, @headerGreyLight);
+        //border-bottom: 2px solid #5c656b;
+        .navbar-text {
+            line-height: 56px;
+            font-size: 13px;
+            color: #FFFFFF;
+        }
+        .nav > li > a {
+            padding: 18px 5px 18px;  
+            font-size: 13px;
+            color: @white;
+        }
+        .navbar-form {
+            margin-top: 8px;
+            margin-left: 15px;
+        }
+        .navbar-form .btn {
+            padding: 4px 8px;
+        }
+    }
+}
+
+// common rules
+.orange-nav-bar {
+	background-color: @alaOrange;
+	border-left: 1px solid @alaOrange;
+	border-right: 1px solid @alaOrange;
+	border-collapse:collapse;
+	color: @white;
+	.box-shadow(none);
+	text-shadow: none;
+}
+
+// TODO: make fonts and spacing smaller for small screens when menu is hidden
+#nav-site .navbar-inner {
+	min-height: 38px;
+    margin-bottom: 20px;
+    padding-right: 20px;
+    padding-left: 20px;
+    background-color: @alaOrange;
+    background-image: none;
+    //border-bottom: 1px solid @alaOrangeDark;    
+    .nav > li > a {
+        .orange-nav-bar;
+        padding: 9px 13px 9px;
+        margin-right: -1px;
+        text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.8);
+        &:hover { 
+            background-color: @headerGreyDark;
+            text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.8);
+        }
+    }
+    .nav > .active > a {
+        .orange-nav-bar;
+        background-color: @headerGreyDark;
+        text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.8);
+    }
+    .dropdown-menu {
+        color: @white;
+        background-color: @alaOrange;
+        a {
+            color: @white;
+            background-color: @alaOrange;            
+            text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.8);
+            &:hover { 
+                background-color: @headerGreyDark;
+                background-image: none;
+                text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.8);
+            }
+        }
+    }
+    .dropdown-menu:before,
+    .dropdown-menu:after {
+        display: none;
+    }
+    .caret {
+        border-top-color: white !important;
+        border-bottom-color: white !important;
+    }
+}
+
+// ALA footer
+// ----------
+footer {
+	margin-top: 30px;
+    background-color: @footerBackground;
+    border-top: 1px solid @footerBorder;
+    font-size: 12px;
+    line-height: 1.6em;
+    color: @headerGreyDark;
+    a {
+        font-size: 12px;
+        color: @headerGreyDark;
+        &:hover {
+            color: darken(@alaOrange, 10%);
+            text-decoration: none;
+        }
+    }
+    > div {
+    	border-bottom: 1px solid #d1d1d1;    	
+    }
+    #top-row {
+    	padding-bottom: 0;
+    	background-color: @footerBackgroundDark;
+    	font-family: Arial, sans-serif;
+    	font-size: 14px;
+    	.row-fluid {
+    		padding-bottom: 0px;
+    	}
+    	a {
+    		//font-weight: bold;
+    		font-size: 14px;
+    	}
+    }
+    #row-2 {
+    	padding-bottom: 10px;
+    }
+    #row-3 {
+    	padding-top: 10px;
+    	padding-bottom: 20px;
+    	a {
+    		text-decoration: underline;
+    	}
+    	img {
+    		padding-right: 10px;
+    	}
+    }
+    .row-fluid {
+        padding-top: 10px;
+        padding-bottom: 10px;
+        .columnTitle {
+            font-weight: bold;
+            font-size: 12px;
+            padding-bottom: 5px;
+        }
+    }
+}
+
+
+
