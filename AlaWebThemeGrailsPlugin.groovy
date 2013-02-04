@@ -30,10 +30,10 @@ made to `ala.less` and then CSS files generated with provided script (see README
     def license = "APACHE"
 
     // Details of company behind the plugin (if there is one)
-    def organization = [ name: "Atlas of Living Australia", url: "http://www.ala.org/" ]
+    def organization = [ name: "Atlas of Living Australia", url: "http://www.ala.org.au/" ]
 
     // Any additional developers beyond the author specified above.
-    def developers = [ [ name: "Dave Martin", email: "david.martin@csiro.au" ]]
+    def developers = [ [ name: "Nick dos Remedios", email: "nick.dosremedios@csiro.au" ], [ name: "Dave Martin", email: "david.martin@csiro.au" ]]
 
     // Location of the plugin's issue tracker.
     def issueManagement = [ system: "Google Code", url: "http://code.google.com/p/ala/issues/list" ]
