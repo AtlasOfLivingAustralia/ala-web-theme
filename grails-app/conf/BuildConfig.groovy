@@ -19,20 +19,20 @@ grails.project.dependency.resolution = {
         //mavenRepo "http://repository.codehaus.org"
         //mavenRepo "http://download.java.net/maven/2/"
         //mavenRepo "http://repository.jboss.com/maven2/"
-        mavenRepo "http://maven.ala.org.au/repository"
+        mavenRepo "http://maven.ala.org.au/repository/"
     }
     dependencies {
         // specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes eg.
         // runtime 'mysql:mysql-connector-java:5.1.18'
-        build 'au.org.ala:ala-cas-client:1.0-SNAPSHOT'
-        build 'org.jasig.cas:cas-client-core:3.1.10'
+        //compile 'au.org.ala:ala-cas-client:1.0-SNAPSHOT'
+        //compile 'org.jasig.cas:cas-client-core:3.1.10'
+        build group:'au.org.ala',
+                name:'ala-cas-client',
+                version:'1.0-SNAPSHOT',
+                transitive:false
     }
 
     plugins {
-        build(":tomcat:$grailsVersion",
-              ":release:2.0.3",
-              ":rest-client-builder:1.0.2") {
-            export = false
-        }
+        build ":tomcat:$grailsVersion"
     }
 }

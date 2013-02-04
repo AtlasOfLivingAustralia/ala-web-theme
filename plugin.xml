@@ -1,4 +1,4 @@
-<plugin name='ala-web-theme' version='0.1' grailsVersion='2.1 &gt; *'>
+<plugin name='ala-web-theme' version='0.2' grailsVersion='2.1 &gt; *'>
   <author>Nick dos Remedios</author>
   <authorEmail>nick.dosremedios@csiro.au</authorEmail>
   <title>Ala Web Theme Plugin</title>
@@ -17,15 +17,18 @@ made to `ala.less` and then CSS files generated with provided script (see README
     <repository name='grailsCentral' url='http://grails.org/plugins' />
     <repository name='http://repo.grails.org/grails/core' url='http://repo.grails.org/grails/core/' />
     <repository name='mavenCentral' url='http://repo1.maven.org/maven2/' />
-    <repository name='http://maven.ala.org.au/repository' url='http://maven.ala.org.au/repository/' />
+    <repository name='http://maven.ala.org.au/repository/' url='http://maven.ala.org.au/repository/' />
   </repositories>
   <dependencies>
     <build>
       <dependency group='au.org.ala' name='ala-cas-client' version='1.0-SNAPSHOT' />
-      <dependency group='org.jasig.cas' name='cas-client-core' version='3.1.10' />
     </build>
   </dependencies>
-  <plugins />
+  <plugins>
+    <build>
+      <plugin group='org.grails.plugins' name='tomcat' version='2.1.1' />
+    </build>
+  </plugins>
   <runtimePluginRequirements />
   <behavior />
 </plugin>
