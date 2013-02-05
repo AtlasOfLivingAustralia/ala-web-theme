@@ -27,6 +27,7 @@ made to `ala.less` and then CSS files generated with provided script (see README
   <plugins>
     <build>
       <plugin group='org.grails.plugins' name='tomcat' version='2.1.1' />
+      <plugin group='org.grails.plugins' name='release' version='2.2.0' />
     </build>
   </plugins>
   <runtimePluginRequirements />
