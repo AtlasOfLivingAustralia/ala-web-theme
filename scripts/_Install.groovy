@@ -22,6 +22,3 @@ ant.copy(file: "${pluginBasedir}/grails-app/views/layouts/main.gsp",
 ant.copy(file: "${pluginBasedir}/grails-app/views/index.gsp",
         toFile: "${basedir}/grails-app/views/index.gsp",
         overwrite: true)
-ant.copy(file: "${pluginBasedir}/grails-app/taglib/au/org/ala/web/theme/HeaderFooterTagLib.groovy",
-        toFile: "${basedir}/grails-app/taglib/au/org/ala/web/theme/HeaderFooterTagLib.groovy",
-        overwrite: true)        
