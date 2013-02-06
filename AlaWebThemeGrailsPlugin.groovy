@@ -55,14 +55,14 @@ made to `ala.less` and then CSS files generated with provided script (see README
                 'param-value' (Holders.config.security.cas.appServerName)
             }
         }
-        System.println("Checking config: ala.baseURL = " + Holders.config.ala.baseURL)
-        System.println("Checking auth config: security.cas.loginUrl = " + Holders.config.security.cas.loginUrl)
-        System.println("Checking app config: ala.test.prop = " + Holders.config.ala.test.prop)
-        System.println("Checking auth config: test.bar = " + Holders.config.test.bar)
+//        System.println("Checking config: ala.baseURL = " + Holders.config.ala.baseURL)
+//        System.println("Checking auth config: security.cas.loginUrl = " + Holders.config.security.cas.loginUrl)
+//        System.println("Checking app config: ala.test.prop = " + Holders.config.ala.test.prop)
+//        System.println("Checking auth config: test.bar = " + Holders.config.test.bar)
     }
 
     def doWithSpring = {
-        System.println("Merging conf...")
+        //System.println("Merging conf...")
         //mergeConfig(application)
     }
 
@@ -80,9 +80,9 @@ made to `ala.less` and then CSS files generated with provided script (see README
     }
 
     def doWithApplicationContext = { applicationContext ->
-        def config = application.config;
-        System.println("doWithApplicationContext config = " + config)
-        config.test.bar = 'set from within doWithApplicationContext'
+//        def config = application.config;
+//        System.println("doWithApplicationContext config = " + config)
+//        config.test.bar = 'set from within doWithApplicationContext'
     }
 
     def onChange = { event ->

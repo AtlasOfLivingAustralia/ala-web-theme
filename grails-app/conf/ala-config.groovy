@@ -1,3 +1,9 @@
+/**
+ * This file is included in the Grails config by the ala-web-theme plugin.
+ *
+ * Edit this file to suit your app's dev/test/prod environments
+ *
+ */
 
 /******* ALA standard config ************/
 headerAndFooter.baseURL = "http://www2.ala.org.au/commonui"
