@@ -46,7 +46,7 @@ made to `ala.less` and then CSS files generated with provided script (see README
 
     def doWithWebDescriptor = { xml ->
         // TODO Implement additions to web.xml (optional), this event occurs before
-        mergeConfig(application) // gets values from auth-config.groovy in apps conf dir
+        mergeConfig(application) // gets values from ala-config.groovy in apps conf dir
         def mappingElement = xml.'context-param'
         def lastMapping = mappingElement[mappingElement.size()-1]
         lastMapping + {

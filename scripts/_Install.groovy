@@ -22,6 +22,6 @@ ant.copy(file: "${pluginBasedir}/grails-app/views/layouts/main.gsp",
 ant.copy(file: "${pluginBasedir}/grails-app/views/index.gsp",
         toFile: "${basedir}/grails-app/views/index.gsp",
         overwrite: true)
-ant.copy(file: "${pluginBasedir}/grails-app/conf/auth-config.groovy",
+ant.copy(file: "${pluginBasedir}/grails-app/conf/ala-config.groovy",
         toFile: "${basedir}/grails-app/conf/ala-config.groovy",
         overwrite: true)
