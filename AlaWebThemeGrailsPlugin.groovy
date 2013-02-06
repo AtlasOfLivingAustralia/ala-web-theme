@@ -1,3 +1,6 @@
+import grails.util.Environment
+import grails.util.Holders
+
 class AlaWebThemeGrailsPlugin {
     // the plugin version
     def version = "0.2"
@@ -43,10 +46,33 @@ made to `ala.less` and then CSS files generated with provided script (see README
 
     def doWithWebDescriptor = { xml ->
         // TODO Implement additions to web.xml (optional), this event occurs before
+        mergeConfig(application) // gets values from auth-config.groovy in apps conf dir
+        def mappingElement = xml.'context-param'
+        def lastMapping = mappingElement[mappingElement.size()-1]
+        lastMapping + {
+            'context-param' {
+                'param-name' ('serverName')
+                'param-value' (Holders.config.security.cas.appServerName)
+            }
+        }
+        System.println("Checking config: ala.baseURL = " + Holders.config.ala.baseURL)
+        System.println("Checking auth config: security.cas.loginUrl = " + Holders.config.security.cas.loginUrl)
+        System.println("Checking app config: ala.test.prop = " + Holders.config.ala.test.prop)
+        System.println("Checking auth config: test.bar = " + Holders.config.test.bar)
     }
 
     def doWithSpring = {
-        // TODO Implement runtime spring config (optional)
+        System.println("Merging conf...")
+        //mergeConfig(application)
+    }
+
+    protected mergeConfig(application) {
+        application.config.merge(loadConfig(application))
+        //System.println("Conf slurp: " + loadConfig(application))
+    }
+
+    protected loadConfig(application) {
+        new ConfigSlurper(Environment.current.name).parse(application.classLoader.loadClass("ala-config"))
     }
 
     def doWithDynamicMethods = { ctx ->
@@ -54,7 +80,9 @@ made to `ala.less` and then CSS files generated with provided script (see README
     }
 
     def doWithApplicationContext = { applicationContext ->
-        // TODO Implement post initialization spring config (optional)
+        def config = application.config;
+        System.println("doWithApplicationContext config = " + config)
+        config.test.bar = 'set from within doWithApplicationContext'
     }
 
     def onChange = { event ->

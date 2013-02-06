@@ -1,6 +1,5 @@
 package au.org.ala.web.theme
 
-import org.codehaus.groovy.grails.commons.ConfigurationHolder
 import grails.util.Holders
 import au.org.ala.cas.util.AuthenticationCookieUtils
 
