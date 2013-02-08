@@ -3,7 +3,7 @@ import grails.util.Holders
 
 class AlaWebThemeGrailsPlugin {
     // the plugin version
-    def version = "0.2"
+    def version = "0.1.2"
     // the version or versions of Grails the plugin is designed for
     def grailsVersion = "2.1 > *"
     // the other plugins this plugin depends on
@@ -54,11 +54,88 @@ made to `ala.less` and then CSS files generated with provided script (see README
                 'param-name' ('serverName')
                 'param-value' (Holders.config.security.cas.appServerName)
             }
+            'context-param' {
+                'param-name' ('casServerName')
+                'param-value' (Holders.config.security.cas.casServerName)
+            }
+            'context-param' {
+                'param-name' ('contextPath')
+                'param-value' (Holders.config.security.cas.contextPath)
+            }
+            'context-param' {
+                'param-name' ('uriFilterPattern')
+                'param-value' (Holders.config.security.cas.uriFilterPattern)
+            }
+            'context-param' {
+                'param-name' ('uriExclusionFilterPattern')
+                'param-value' (Holders.config.security.cas.uriExclusionFilterPattern)
+            }
+            'context-param' {
+                'param-name' ('authenticateOnlyIfLoggedInFilterPattern')
+                'param-value' (Holders.config.security.cas.authenticateOnlyIfLoggedInPattern)
+            }
         }
-//        System.println("Checking config: ala.baseURL = " + Holders.config.ala.baseURL)
-//        System.println("Checking auth config: security.cas.loginUrl = " + Holders.config.security.cas.loginUrl)
-//        System.println("Checking app config: ala.test.prop = " + Holders.config.ala.test.prop)
-//        System.println("Checking auth config: test.bar = " + Holders.config.test.bar)
+
+        mappingElement = xml.'filter'
+        lastMapping = mappingElement[mappingElement.size()-1]
+        lastMapping + {
+            'filter' {
+                'filter-name' ('CAS Single Sign Out Filter')
+                'filter-class' ('org.jasig.cas.client.session.SingleSignOutFilter')
+            }
+            'filter' {
+                'filter-name' ('CAS Authentication Filter')
+                'filter-class' ('au.org.ala.cas.client.UriFilter')
+                'init-param' {
+                    'param-name' ('filterClass')
+                    'param-value' ('org.jasig.cas.client.authentication.AuthenticationFilter')
+                }
+                'init-param' {
+                    'param-name' ('casServerLoginUrl')
+                    'param-value' (Holders.config.security.cas.loginUrl)
+                }
+                'init-param' {
+                    'param-name' ('gateway')
+                    'param-value' ('false')
+                }
+            }
+            'filter' {
+                'filter-name' ('CAS Validation Filter')
+                'filter-class' ('au.org.ala.cas.client.UriFilter')
+                'init-param' {
+                    'param-name' ('filterClass')
+                    'param-value' ('org.jasig.cas.client.validation.Cas20ProxyReceivingTicketValidationFilter')
+                }
+                'init-param' {
+                    'param-name' ('casServerUrlPrefix')
+                    'param-value' (Holders.config.security.cas.casServerName)
+                }
+            }
+            'filter' {
+                'filter-name' ('CAS HttpServletRequest Wrapper Filter')
+                'filter-class' ('au.org.ala.cas.client.UriFilter')
+                'init-param' {
+                    'param-name' ('filterClass')
+                    'param-value' ('au.org.ala.cas.client.AlaHttpServletRequestWrapperFilter')
+                }
+            }
+            'filter-mapping' {
+                'filter-name' ('CAS Single Sign Out Filter')
+                'url-pattern' ('/*')
+            }
+            'filter-mapping' {
+                'filter-name' ('CAS Authentication Filter')
+                'url-pattern' ('/*')
+            }
+            'filter-mapping' {
+                'filter-name' ('CAS Validation Filter')
+                'url-pattern' ('/*')
+            }
+            'filter-mapping' {
+                'filter-name' ('CAS HttpServletRequest Wrapper Filter')
+                'url-pattern' ('/*')
+            }
+        }
     }
 
     def doWithSpring = {

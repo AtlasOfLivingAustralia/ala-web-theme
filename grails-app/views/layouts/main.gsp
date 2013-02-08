@@ -11,8 +11,8 @@
 
     <title><g:layoutTitle /> | Atlas of Living Australia</title>
 
-    <link rel="icon" type="image/x-icon" href="${resource(dir: 'images', file: 'favicon.ico', plugin:'ala-web-theme')}">
-    <link rel="shortcut icon" type="image/x-icon" href="${resource(dir: 'images', file: 'favicon.ico', plugin:'ala-web-theme')}">
+    <link rel="icon" type="image/x-icon" href="http://www.ala.org.au/wp-content/themes/ala2011/images/favicon.ico">
+    <link rel="shortcut icon" type="image/x-icon" href="http://www.ala.org.au/wp-content/themes/ala2011/images/favicon.ico">
 
     <link rel="stylesheet" type="text/css" href="${resource(dir: 'css', file: 'bootstrap.css', plugin:'ala-web-theme')}">
     <link rel="stylesheet" type="text/css" href="${resource(dir: 'css', file: 'bootstrap-responsive.css', plugin:'ala-web-theme')}">

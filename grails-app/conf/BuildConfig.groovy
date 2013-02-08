@@ -30,6 +30,7 @@ grails.project.dependency.resolution = {
                 name:'ala-cas-client',
                 version:'1.0-SNAPSHOT',
                 transitive:false
+        build 'org.jasig.cas:cas-client-core:3.1.10'
     }
 
     plugins {
@@ -39,3 +40,4 @@ grails.project.dependency.resolution = {
         }
     }
 }
+
