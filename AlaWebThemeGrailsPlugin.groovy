@@ -3,7 +3,7 @@ import grails.util.Holders
 
 class AlaWebThemeGrailsPlugin {
     // the plugin version
-    def version = "0.1.2"
+    def version = "0.1.3"
     // the version or versions of Grails the plugin is designed for
     def grailsVersion = "2.1 > *"
     // the other plugins this plugin depends on
@@ -108,7 +108,7 @@ made to `ala.less` and then CSS files generated with provided script (see README
                 }
                 'init-param' {
                     'param-name' ('casServerUrlPrefix')
-                    'param-value' (Holders.config.security.cas.casServerName)
+                    'param-value' (Holders.config.security.cas.casServerUrlPrefix)
                 }
             }
             'filter' {
