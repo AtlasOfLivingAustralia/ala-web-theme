@@ -1,25 +1,24 @@
-
 // Global values
 // -----------------------------
-@offWhite:              #fffef7;
-@alaOrange:             lighten(#df4a21, 10%);
-@alaOrangeDark:         lighten(#bc2b03, 10%);
-
+@offWhite: #fffef7;
+@alaOrange: lighten(#df4a21, 10%);
+@alaOrangeDark: lighten(#bc2b03, 10%);
 
 // Scaffolding
 // -------------------------------
-@bodyBackground:        @offWhite;
-@textColor:             #333a3f;
-@linkColor:             #007fb6; // darken(#08c, 5%);
-@linkColorHover:        darken(@linkColor, 10%);
-@wellBackground:        #f0f0e8;
-@heroUnitBackground:    #e6e6dd;
-@headerGrey:            #3D464B;
-@headerGreyLight:       #353D42;
-@headerGreyDark:        #333a3f;
-@footerBackground:      @wellBackground;
-@footerBackgroundDark:  @heroUnitBackground;
-@footerBorder:          #d1d1d1;
+@bodyBackground: @offWhite;
+@textColor: #333a3f;
+@linkColor: #007fb6;
+// darken(#08c, 5%);
+@linkColorHover: darken(@linkColor, 10%);
+@wellBackground: #f0f0e8;
+@heroUnitBackground: #e6e6dd;
+@headerGrey: #3D464B;
+@headerGreyLight: #353D42;
+@headerGreyDark: #333a3f;
+@footerBackground: @wellBackground;
+@footerBackgroundDark: @heroUnitBackground;
+@footerBorder: #d1d1d1;
 
 // Overrides for Bootstrap
 // -------------------------------
@@ -28,11 +27,24 @@
     background-color: darken(@wellBackground, 10%);
 }
 
+.breadcrumb {
+    background-color: inherit;
+    margin: 0 0 20px 0;
+    padding: 0;
+    > li {
+        > .divider {
+            color: @grayLight;
+        }
+    }
+    > .active {
+        color: @gray;
+    }
+}
+
 // Sprite icons path
 // -------------------------
-@iconSpritePath:          "../images/glyphicons-halflings.png";
-@iconWhiteSpritePath:     "../images/glyphicons-halflings-white.png";
-
+@iconSpritePath: "../images/glyphicons-halflings.png";
+@iconWhiteSpritePath: "../images/glyphicons-halflings-white.png";
 
 // ALA Header
 // -------------------------------
@@ -40,15 +52,15 @@
     margin-bottom: 0px;
     .navbar-inner {
         min-height: 56px;
-        #gradient .vertical(@headerGrey, @headerGreyLight);
-        //border-bottom: 2px solid #5c656b;
+        #gradient .vertical
+    (@headerGrey, @headerGreyLight); //border-bottom: 2px solid #5c656b;
         .navbar-text {
             line-height: 56px;
             font-size: 13px;
             color: #FFFFFF;
         }
         .nav > li > a {
-            padding: 18px 5px 18px;  
+            padding: 18px 5px 18px;
             font-size: 13px;
             color: @white;
         }
@@ -64,30 +76,29 @@
 
 // common rules
 .orange-nav-bar {
-	background-color: @alaOrange;
-	border-left: 1px solid @alaOrange;
-	border-right: 1px solid @alaOrange;
-	border-collapse:collapse;
-	color: @white;
-	.box-shadow(none);
-	text-shadow: none;
+    background-color: @alaOrange;
+    border-left: 1px solid @alaOrange;
+    border-right: 1px solid @alaOrange;
+    border-collapse: collapse;
+    color: @white;
+    .box-shadow(none);
+    text-shadow: none;
 }
 
 // TODO: make fonts and spacing smaller for small screens when menu is hidden
 #nav-site .navbar-inner {
-	min-height: 38px;
+    min-height: 38px;
     margin-bottom: 20px;
     padding-right: 20px;
     padding-left: 20px;
     background-color: @alaOrange;
-    background-image: none;
-    //border-bottom: 1px solid @alaOrangeDark;    
+    background-image: none; //border-bottom: 1px solid @alaOrangeDark;
     .nav > li > a {
         .orange-nav-bar;
         padding: 9px 13px 9px;
         margin-right: -1px;
         text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.8);
-        &:hover { 
+        &:hover {
             background-color: @headerGreyDark;
             text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.8);
         }
@@ -102,9 +113,9 @@
         background-color: @alaOrange;
         a {
             color: @white;
-            background-color: @alaOrange;            
+            background-color: @alaOrange;
             text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.8);
-            &:hover { 
+            &:hover {
                 background-color: @headerGreyDark;
                 background-image: none;
                 text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.8);
@@ -124,7 +135,7 @@
 // ALA footer
 // ----------
 footer {
-	margin-top: 30px;
+    margin-top: 30px;
     background-color: @footerBackground;
     border-top: 1px solid @footerBorder;
     font-size: 12px;
@@ -139,33 +150,32 @@ footer {
         }
     }
     > div {
-    	border-bottom: 1px solid #d1d1d1;    	
+        border-bottom: 1px solid #d1d1d1;
     }
     #top-row {
-    	padding-bottom: 0;
-    	background-color: @footerBackgroundDark;
-    	font-family: Arial, sans-serif;
-    	font-size: 14px;
-    	.row-fluid {
-    		padding-bottom: 0px;
-    	}
-    	a {
-    		//font-weight: bold;
-    		font-size: 14px;
-    	}
+        padding-bottom: 0;
+        background-color: @footerBackgroundDark;
+        font-family: Arial, sans-serif;
+        font-size: 14px;
+        .row-fluid {
+            padding-bottom: 0px;
+        }
+        a { //font-weight: bold;
+            font-size: 14px;
+        }
     }
     #row-2 {
-    	padding-bottom: 10px;
+        padding-bottom: 10px;
     }
     #row-3 {
-    	padding-top: 10px;
-    	padding-bottom: 20px;
-    	a {
-    		text-decoration: underline;
-    	}
-    	img {
-    		padding-right: 10px;
-    	}
+        padding-top: 10px;
+        padding-bottom: 20px;
+        a {
+            text-decoration: underline;
+        }
+        img {
+            padding-right: 10px;
+        }
     }
     .row-fluid {
         padding-top: 10px;
@@ -178,5 +188,39 @@ footer {
     }
 }
 
+/* Grails generated overrides */
+
+.custom-sprite (@offset) {
+    content: " ";
+    padding-left: 5px;
+    background: url("@{iconSpritePath}");
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    line-height: 14px;
+    vertical-align: text-top;
+    margin-top: 1px;
+    background-position: @offset;
+}
+
+div.nav {
+    ul {
+        .breadcrumb;
+        li {
+            a {
+                margin-right: 20px;
+            }
+            a.home:before {
+                .custom-sprite (0 -24px);
+            }
+            a.create:before {
+                .custom-sprite (0 -72px);
+            }
+            a.list:before {
+                .custom-sprite (-360px -48px);
+            }
+        }
+    }
+}
 
 
