@@ -16,10 +16,10 @@
 
     <link rel="stylesheet" type="text/css" href="${resource(dir: 'css', file: 'bootstrap.css', plugin:'ala-web-theme')}">
     <link rel="stylesheet" type="text/css" href="${resource(dir: 'css', file: 'bootstrap-responsive.css', plugin:'ala-web-theme')}">
-    <link rel="stylesheet" type="text/css" media="screen" href="${grailsApplication.config.ala.baseURL?:'http://www.ala.org.au'?:'http://www.ala.org.au'}/wp-content/themes/ala2011/css/jquery.autocomplete.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="${grailsApplication.config.ala.baseURL?:'http://www.ala.org.au'}/wp-content/themes/ala2011/css/jquery.autocomplete.css" />
 
     %{--<r:require module="jquery"/>--}%
-    <script type="text/javascript" src="${grailsApplication.config.ala.baseURL?:'http://www.ala.org.au'?:'http://www.ala.org.au'}/wp-content/themes/ala2011/scripts/html5.js"></script>
+    <script type="text/javascript" src="${grailsApplication.config.ala.baseURL?:'http://www.ala.org.au'}/wp-content/themes/ala2011/scripts/html5.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
     %{--<script src="http://code.jquery.com/jquery-latest.js"></script>
     <script src="${resource(dir: 'js', file: 'jquery.tools.min.js', plugin:'ala-web-theme')}"></script>--}%
@@ -27,8 +27,8 @@
 
     <g:layoutHead />
     %{--<r:layoutResources/>--}%
-    <script language="JavaScript" type="text/javascript" src="${grailsApplication.config.ala.baseURL?:'http://www.ala.org.au'?:'http://www.ala.org.au'?:'http://www.ala.org.au'}/wp-content/themes/ala2011/scripts/jquery.autocomplete.js"></script>
-    <script language="JavaScript" type="text/javascript" src="${grailsApplication.config.ala.baseURL?:'http://www.ala.org.au'?:'http://www.ala.org.au'}/wp-content/themes/ala2011/scripts/uservoice.js"></script>
+    <script language="JavaScript" type="text/javascript" src="${grailsApplication.config.ala.baseURL?:'http://www.ala.org.au'}/wp-content/themes/ala2011/scripts/jquery.autocomplete.js"></script>
+    <script language="JavaScript" type="text/javascript" src="${grailsApplication.config.ala.baseURL?:'http://www.ala.org.au'}/wp-content/themes/ala2011/scripts/uservoice.js"></script>
 
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
