@@ -15,8 +15,8 @@
 @bodyBackground: @offWhite;
 @textColor: #333a3f;
 @linkColor: #007fb6;
-// darken(#08c, 5%);
-@linkColorHover: darken(@linkColor, 10%);
+@linkColorHover: darken(@linkColor, 8%);
+
 @wellBackground: @alaBiegeLight;
 @heroUnitBackground: @alaBiegeDark;
 @btnBackground: lighten(@alaBiegeDark, 10%);
@@ -29,6 +29,12 @@
 
 // Overrides for Bootstrap
 // -------------------------------
+
+h1 { font-size: @baseFontSize * 2.25; } // ~38px
+h2 { font-size: @baseFontSize * 2.00; } // ~32px
+h3 { font-size: @baseFontSize * 1.50; } // ~24px
+h4 { font-size: @baseFontSize * 1.25; } // ~18px
+
 .nav > li > a:hover {
     text-decoration: none;
     background-color: darken(@wellBackground, 10%);
@@ -46,6 +52,11 @@
     > .active {
         color: @gray;
     }
+}
+
+// ALA orange button. Usage: <foo class="btn btn-ala"/>
+.btn-ala {
+    .buttonBackground(@alaOrange, @alaOrangeDark);
 }
 
 // Sprite icons path
@@ -209,7 +220,7 @@ footer {
     background-position: @offset;
 }
 
-div.nav {
+div.nav { // Grails nav bar
     ul {
         .breadcrumb;
         li {
@@ -242,6 +253,13 @@ div.nav {
     .table-hover;
 }
 
+.tableList {
+    .table;
+    .table-striped;
+    //.table-bordered;
+    .table-hover;
+}
+
 // Adapted from grails CSS
 .property-list {
     margin: 0.6em 1.25em 0 1.25em;
@@ -255,62 +273,49 @@ div.nav {
         overflow: hidden;
         zoom: 1;
         margin-top: 1em;
-        //.makeRow();
         .property-label {
-            //.makeColumn(4);
             float: left;
-            //color: #666666;
             text-align: right;
             width: 25%;
         }
         .property-value {
-            //.makeColumn(8);
             display: block;
             margin-left: 27%;
         }
     }
 }
 
-.content {
+.content, #content {
+    // form buttons
     .edit, .delete, .save {
         .btn;
     }
+    // pagination
+    div.pagination {
+        width: 100%;
+        text-align: center;
+        .btn-group;
+        span, a {
+            .btn;
+            .btn-small;
+            margin-right: 5px;
+            &.currentStep {
+                .disabled;
+                .btn-inverse;
+            }
+            &.nextLink:after {
+                font-size: 16px;
+                content: "\00bb";
+                padding-left: 5px;
+            }
+            &.prevLink:before {
+                font-size: 16px;
+                content: "\00ab";
+                padding-right: 5px;
+            }
+        }
+    }
 }
-
-//fieldset,
-//.property-list {
-//    margin: 0.6em 1.25em 0 1.25em;
-//    padding: 0.3em 1.8em 1.25em;
-//    position: relative;
-//    zoom: 1;
-//    border: none;
-//}
-//
-//.property-list .fieldcontain {
-//    list-style: none;
-//    overflow: hidden;
-//    zoom: 1;
-//}
-//
-//.fieldcontain {
-//    margin-top: 1em;
-//}
-//
-//.fieldcontain label,
-//.fieldcontain .property-label {
-//    color: #666666;
-//    text-align: right;
-//    width: 25%;
-//}
-//
-//.fieldcontain .property-label {
-//    float: left;
-//}
-//
-//.fieldcontain .property-value {
-//    display: block;
-//    margin-left: 27%;
-//}
 
 
 
