@@ -8,3 +8,37 @@
 //
 //    ant.mkdir(dir:"${basedir}/grails-app/jobs")
 //
+
+File alaConfigFile = new File(new File(new File(basedir, "grails-app"), "conf"), "ala-config.groovy")
+def toConfFile =  "${basedir}/grails-app/conf/ala-config.groovy"
+File layoutFile = new File(new File(new File(basedir, "grails-app"), "views/layouts"), "main.gsp")
+def toLayoutFile =  "${basedir}/grails-app/views/layouts/main.gsp"
+File indexFile = new File(new File(new File(basedir, "grails-app"), "views"), "index.gsp")
+def toIndexFile =  "${basedir}/grails-app/views/index.gsp"
+
+if (alaConfigFile.exists() && layoutFile.exists() && indexFile.exists()) {
+    // assume plugin has been installed previously or files are present via SVN
+    println "plugin files already present - appending with .new"
+    println "Please diff the .new files with their existing counterparts to look for modified/added lines"
+    toConfFile += ".new"
+    toLayoutFile += ".new"
+    toIndexFile += ".new"
+} else {
+    // assume first time installation - backup original files first
+    ant.copy(file: "${basedir}/grails-app/views/layouts/main.gsp",
+            toFile: "${basedir}/grails-app/views/layouts/main.gsp.bak")
+    ant.copy(file: "${basedir}/grails-app/views/index.gsp",
+            toFile: "${basedir}/grails-app/views/index.gsp.bak")
+}
+//layout file
+ant.copy(file: "${pluginBasedir}/grails-app/views/layouts/main.gsp",
+        toFile: toLayoutFile,
+        overwrite: true)
+// index file
+ant.copy(file: "${pluginBasedir}/grails-app/views/index.gsp",
+        toFile: toIndexFile,
+        overwrite: true)
+// ala-config.groovy file
+ant.copy(file: "${pluginBasedir}/grails-app/conf/ala-config.groovy",
+        toFile: toConfFile,
+        overwrite: true)

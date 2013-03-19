@@ -5137,7 +5137,7 @@ h4 {
   padding: 0;
 }
 .breadcrumb > li > .divider {
-  color: #999999;
+  color: #555555;
 }
 .breadcrumb > .active {
   color: #555555;
@@ -5358,7 +5358,7 @@ div.nav ul > .active {
   color: #999999;
 }
 div.nav ul > li > .divider {
-  color: #999999;
+  color: #555555;
 }
 div.nav ul > .active {
   color: #555555;

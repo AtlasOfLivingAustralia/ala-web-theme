@@ -2,6 +2,7 @@
 <html>
 <head>
     <meta name="layout" content="main"/>
+    <meta name="section" content="home"/>
     <title>ALA Web Theme - Home</title>
 </head>
 <body>
