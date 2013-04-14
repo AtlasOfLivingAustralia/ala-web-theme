@@ -10,6 +10,7 @@
 @headerGreyLight: #353D42;
 @headerGreyDark: #333a3f;
 
+@baseFontSize: 13px;
 // Scaffolding
 // -------------------------------
 @bodyBackground: @offWhite;
@@ -30,10 +31,10 @@
 // Overrides for Bootstrap
 // -------------------------------
 
-h1 { font-size: @baseFontSize * 2.25; } // ~38px
-h2 { font-size: @baseFontSize * 2.00; } // ~32px
-h3 { font-size: @baseFontSize * 1.50; } // ~24px
-h4 { font-size: @baseFontSize * 1.25; } // ~18px
+h1 { font-size: @baseFontSize * 2.00; }
+h2 { font-size: @baseFontSize * 1.75; }
+h3 { font-size: @baseFontSize * 1.50; }
+h4 { font-size: @baseFontSize * 1.25; }
 
 .nav > li > a:hover {
     text-decoration: none;
@@ -100,12 +101,13 @@ h4 { font-size: @baseFontSize * 1.25; } // ~18px
     color: @white;
     .box-shadow(none);
     text-shadow: none;
+    font-size: 14px;
 }
 
 // TODO: make fonts and spacing smaller for small screens when menu is hidden
 #nav-site .navbar-inner {
     min-height: 38px;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
     padding-right: 20px;
     padding-left: 20px;
     background-color: @alaOrange;
@@ -114,16 +116,16 @@ h4 { font-size: @baseFontSize * 1.25; } // ~18px
         .orange-nav-bar;
         padding: 9px 13px 9px;
         margin-right: -1px;
-        text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.8);
+        //text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.8);
         &:hover {
             background-color: @headerGreyDark;
-            text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.8);
+            //text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.8);
         }
     }
     .nav > .active > a {
         .orange-nav-bar;
         background-color: @headerGreyDark;
-        text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.8);
+        //text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.8);
     }
     .dropdown-menu {
         color: @white;
@@ -131,11 +133,11 @@ h4 { font-size: @baseFontSize * 1.25; } // ~18px
         a {
             color: @white;
             background-color: @alaOrange;
-            text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.8);
+            //text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.8);
             &:hover {
                 background-color: @headerGreyDark;
                 background-image: none;
-                text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.8);
+                //text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.8);
             }
         }
     }
@@ -250,13 +252,6 @@ div.nav { // Grails nav bar
     .table;
     .table-striped;
     .table-bordered;
-    .table-hover;
-}
-
-.tableList {
-    .table;
-    .table-striped;
-    //.table-bordered;
     .table-hover;
 }
 
