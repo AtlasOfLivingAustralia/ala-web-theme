@@ -25,7 +25,7 @@ try {
         // assume plugin has been installed previously or files are present via SVN
         ant.echo("Plugin files already present - appending with .new")
         toConfFile += ".new"
-        toLayoutFile += ".new"
+        //toLayoutFile += ".new"
         toIndexFile += ".new"
     } else {
         // assume first time installation - backup original files first

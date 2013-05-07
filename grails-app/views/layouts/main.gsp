@@ -1,6 +1,6 @@
 <%@ page import="org.codehaus.groovy.grails.commons.ConfigurationHolder" %>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="app.version" content="${g.meta(name:'app.version')}"/>
@@ -73,10 +73,10 @@
                 var currentHref = $("#responsiveCss").attr("href");
                 if (currentHref) {
                     $("#responsiveCss").attr("href", ""); // set to desktop (fixed)
-                    (this).find("span").html("Mobile");
+                    $(this).find("span").html("Mobile");
                 } else {
                     $("#responsiveCss").attr("href", responsiveCssFile); // set to mobile (responsive)
-                    (this).find("span").html("Desktop");
+                    $(this).find("span").html("Desktop");
                 }
             });
         });
@@ -94,9 +94,9 @@
     <g:layoutBody />
 </div><!--/.container-->
 
-<div class="container visible-phone">
+<div class="container hidden-desktop">
     <%-- Borrowed from http://marcusasplund.com/optout/ --%>
-    <a class="btn btn-small toggleResponsive"><i class="icon-resize-small"></i> <span>Desktop</span> version</a>
+    <a class="btn btn-small toggleResponsive"><i class="icon-resize-full"></i> <span>Desktop</span> version</a>
     %{--<a class="btn btn-small toggleResponsive"><i class="icon-resize-full"></i> Desktop version</a>--}%
 </div>
 
