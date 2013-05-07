@@ -15,7 +15,7 @@
     <link rel="shortcut icon" type="image/x-icon" href="http://www.ala.org.au/wp-content/themes/ala2011/images/favicon.ico">
 
     <link rel="stylesheet" type="text/css" href="${resource(dir: 'css', file: 'bootstrap.css', plugin:'ala-web-theme')}">
-    <link rel="stylesheet" type="text/css" media="screen" href="${resource(dir: 'css', file: 'bootstrap-responsive.css', plugin:'ala-web-theme')}">
+    <link id="responsiveCss" rel="stylesheet" type="text/css" media="screen" href="${resource(dir: 'css', file: 'bootstrap-responsive.css', plugin:'ala-web-theme')}">
     <link rel="stylesheet" type="text/css" media="screen" href="${grailsApplication.config.ala.baseURL?:'http://www.ala.org.au'}/wp-content/themes/ala2011/css/jquery.autocomplete.css" />
 
     <script type="text/javascript" src="${grailsApplication.config.ala.baseURL?:'http://www.ala.org.au'}/wp-content/themes/ala2011/scripts/html5.js"></script>
@@ -63,7 +63,25 @@
                 max: 10,
                 selectFirst: false
             });
+
+            // Mobile/desktop toggle
+            // TODO: set a cookie so user's choice is remembered across pages
+            var responsiveCssFile = $("#responsiveCss").attr("href"); // remember set href
+            $(".toggleResponsive").click(function(e) {
+                e.preventDefault();
+                $(this).find("i").toggleClass("icon-resize-small icon-resize-full");
+                var currentHref = $("#responsiveCss").attr("href");
+                if (currentHref) {
+                    $("#responsiveCss").attr("href", ""); // set to desktop (fixed)
+                    (this).find("span").html("Mobile");
+                } else {
+                    $("#responsiveCss").attr("href", responsiveCssFile); // set to mobile (responsive)
+                    (this).find("span").html("Desktop");
+                }
+            });
         });
+
+
     </script>
 </head>
 <body class="${pageProperty(name:'body.class')}" id="${pageProperty(name:'body.id')}" onload="${pageProperty(name:'body.onload')}">
@@ -75,6 +93,12 @@
 <div class="container" id="main-content">
     <g:layoutBody />
 </div><!--/.container-->
+
+<div class="container visible-phone">
+    <%-- Borrowed from http://marcusasplund.com/optout/ --%>
+    <a class="btn btn-small toggleResponsive"><i class="icon-resize-small"></i> <span>Desktop</span> version</a>
+    %{--<a class="btn btn-small toggleResponsive"><i class="icon-resize-full"></i> Desktop version</a>--}%
+</div>
 
 <hf:footer/>
 <!-- JS resources-->

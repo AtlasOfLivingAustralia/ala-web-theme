@@ -154,7 +154,7 @@ h4 { font-size: @baseFontSize * 1.25; }
 // ALA footer
 // ----------
 footer {
-    margin-top: 30px;
+    margin-top: 20px;
     background-color: @footerBackground;
     border-top: 1px solid @footerBorder;
     font-size: 12px;
@@ -280,6 +280,10 @@ div.nav { // Grails nav bar
     }
 }
 
+#main-content {
+    margin-bottom: 20px;
+}
+
 .content, #content {
     // form buttons
     .edit, .delete, .save {
@@ -312,6 +316,43 @@ div.nav { // Grails nav bar
     }
 }
 
+/* Mobile specific styling */
+@media (max-width: 979px) {
+
+    .navbar-inner {
+        min-height: 3px !important;
+        .btn-navbar {
+            margin-top: 12px;
+        }
+        .nav > li > a {
+            padding: 7px 10px !important;
+        }
+        .navbar-form {
+            margin-left: 0 !important;
+        }
+        input#search-2011 {
+            display: inline-block;
+            width: 85%;
+        }
+    }
+}
+
+@media (max-width: 767px) {
+    footer {
+        margin-left: -20px;
+        margin-right: -20px;
+        .row-fluid {
+            padding: 0;
+        }
+        .span2 {
+            padding: 10px 0;
+            border-bottom: 1px solid @footerBorder;;
+            a {
+                padding-left: 20px;
+            }
+        }
+    }
+}
 
 
 

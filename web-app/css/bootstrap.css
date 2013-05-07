@@ -5414,7 +5414,7 @@ h4 {
   border-bottom-color: white !important;
 }
 footer {
-  margin-top: 30px;
+  margin-top: 20px;
   background-color: #f0f0e8;
   border-top: 1px solid #d1d1d1;
   font-size: 12px;
@@ -5683,6 +5683,9 @@ div.nav ul li a.list:before {
 .property-list .fieldcontain .property-value {
   display: block;
   margin-left: 27%;
+}
+#main-content {
+  margin-bottom: 20px;
 }
 .content .edit,
 #content .edit,
@@ -6142,4 +6145,39 @@ div.nav ul li a.list:before {
   font-size: 16px;
   content: "\00ab";
   padding-right: 5px;
+}
+/* Mobile specific styling */
+@media (max-width: 979px) {
+  .navbar-inner {
+    min-height: 3px !important;
+  }
+  .navbar-inner .btn-navbar {
+    margin-top: 12px;
+  }
+  .navbar-inner .nav > li > a {
+    padding: 7px 10px !important;
+  }
+  .navbar-inner .navbar-form {
+    margin-left: 0 !important;
+  }
+  .navbar-inner input#search-2011 {
+    display: inline-block;
+    width: 85%;
+  }
+}
+@media (max-width: 767px) {
+  footer {
+    margin-left: -20px;
+    margin-right: -20px;
+  }
+  footer .row-fluid {
+    padding: 0;
+  }
+  footer .span2 {
+    padding: 10px 0;
+    border-bottom: 1px solid #d1d1d1;
+  }
+  footer .span2 a {
+    padding-left: 20px;
+  }
 }
