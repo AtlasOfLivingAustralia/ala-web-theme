@@ -1,8 +1,8 @@
 // Global values
 // -----------------------------
 @offWhite: #fffef7;
-@alaOrange: lighten(#df4a21, 10%);
-@alaOrangeDark: lighten(#bc2b03, 10%);
+@alaOrange: lighten(#df4a21, 0%);
+@alaOrangeDark: darken(#df4a21, 0%);
 @alaBiegeLight: #f0f0e8;
 @alaBiegeDark: #e6e6dd;
 
@@ -11,6 +11,7 @@
 @headerGreyDark: #333a3f;
 
 @baseFontSize: 13px;
+
 // Scaffolding
 // -------------------------------
 @bodyBackground: @offWhite;
@@ -69,6 +70,9 @@ h4 { font-size: @baseFontSize * 1.25; }
 // -------------------------------
 #site-header {
     margin-bottom: 0px;
+    .hidden-desktop {
+        .hide; // should be overridden by responsive css
+    }
     .navbar-inner {
         min-height: 56px;
         #gradient .vertical (@headerGrey, @headerGreyLight); //border-bottom: 2px solid #5c656b;
@@ -77,14 +81,32 @@ h4 { font-size: @baseFontSize * 1.25; }
             font-size: 13px;
             color: #FFFFFF;
         }
-        .nav > li > a {
-            padding: 18px 5px 18px;
+        ul.nav {
+            padding: 10px;
+        }
+        ul.nav > li > a {
+            padding: 8px 5px;
             font-size: 13px;
             color: @white;
+        }
+        a.btn-navbar {
+            margin-top: 12px;
         }
         .navbar-form {
             margin-top: 8px;
             margin-left: 15px;
+        }
+        form {
+            margin:0;
+        }
+        #search-2013 {
+            width:240px;
+        }
+        .input-append {
+            padding:12px 10px 10px 0;
+            button i {
+                margin-left:-3px;
+            }
         }
         .navbar-form .btn {
             padding: 4px 8px;
@@ -284,6 +306,11 @@ div.nav { // Grails nav bar
     margin-bottom: 20px;
 }
 
+div.ac_results {
+    margin-left:10px;
+    margin-right: -20px;
+}
+
 .content, #content {
     // form buttons
     .edit, .delete, .save {
@@ -316,10 +343,12 @@ div.nav { // Grails nav bar
     }
 }
 
-/* Mobile specific styling */
+// Mobile & tablet specific styling
 @media (max-width: 979px) {
-
-    .navbar-inner {
+    .well {
+        .well-small;
+    }
+    #nav-site .navbar-inner {
         min-height: 3px !important;
         .btn-navbar {
             margin-top: 12px;

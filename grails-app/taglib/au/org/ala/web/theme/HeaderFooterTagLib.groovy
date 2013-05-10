@@ -22,6 +22,7 @@ class HeaderFooterTagLib {
     // the next two can also be overridden by tag attributes
     def casLoginUrl = Holders.config.security.cas.loginUrl ?: "https://auth.ala.org.au/cas/login"
     def casLogoutUrl = Holders.config.security.cas.logoutUrl ?: "https://auth.ala.org.au/cas/logout"
+    def cacheTimeout = Holders.config.headerAndFooter.cacheTimeout ?: 1800000
 
     /**
      * Display the page banner. Includes login/logout link and search box.
@@ -38,7 +39,7 @@ class HeaderFooterTagLib {
      * @attr ignoreCookie - if true the helper cookie will not be used to determine login - defaults to false
      */
     def banner = { attrs ->
-        out << load('banner', attrs)
+        out << load('banner2', attrs)
     }
 
     /**
@@ -66,7 +67,7 @@ class HeaderFooterTagLib {
      * Cache for includes. Expires after 30mins or when clearCache is called.
      */
     def hfCache = [
-            banner: [timestamp: new Date().time, content: ""],
+            banner2: [timestamp: new Date().time, content: ""],
             menu: [timestamp: new Date().time, content: ""],
             footer: [timestamp: new Date().time, content: ""]]
 
@@ -86,7 +87,7 @@ class HeaderFooterTagLib {
      */
     String load(which, attrs) {
         def content
-        if (hfCache[which].content == "" || (new Date().time > hfCache[which].timestamp + 1800000)) {
+        if (hfCache[which].content == "" || (new Date().time > hfCache[which].timestamp + cacheTimeout)) {
             content = getContent(which)
             hfCache[which].content = content
             hfCache[which].timestamp = new Date().time
