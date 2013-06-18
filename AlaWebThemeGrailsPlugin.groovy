@@ -45,8 +45,6 @@ made to `ala.less` and then CSS files generated with provided script (see README
     def scm = [ url: "http://code.google.com/p/ala/source/browse/trunk/ala-web-theme" ]
 
     def doWithWebDescriptor = { xml ->
-        // TODO Implement additions to web.xml (optional), this event occurs before
-        mergeConfig(application) // gets values from ala-config.groovy in apps conf dir
         def mappingElement = xml.'context-param'
         def lastMapping = mappingElement[mappingElement.size()-1]
         lastMapping + {
@@ -148,23 +146,12 @@ made to `ala.less` and then CSS files generated with provided script (see README
         //mergeConfig(application)
     }
 
-    protected mergeConfig(application) {
-        application.config.merge(loadConfig(application))
-        //System.println("Conf slurp: " + loadConfig(application))
-    }
-
-    protected loadConfig(application) {
-        new ConfigSlurper(Environment.current.name).parse(application.classLoader.loadClass("ala-config"))
-    }
-
     def doWithDynamicMethods = { ctx ->
         // TODO Implement registering dynamic methods to classes (optional)
     }
 
     def doWithApplicationContext = { applicationContext ->
-//        def config = application.config;
-//        System.println("doWithApplicationContext config = " + config)
-//        config.test.bar = 'set from within doWithApplicationContext'
+
     }
 
     def onChange = { event ->

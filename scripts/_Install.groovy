@@ -47,10 +47,7 @@ try {
     ant.copy(file: "${pluginBasedir}/grails-app/views/index.gsp",
              toFile: toIndexFile,
              overwrite: true)
-// ala-config.groovy file
-    ant.copy(file: "${pluginBasedir}/grails-app/conf/ala-config.groovy",
-             toFile: toConfFile,
-             overwrite: true)
+
 } catch (Exception ex) {
     ant.echo("Error running install script: " + ex.message)
 }
