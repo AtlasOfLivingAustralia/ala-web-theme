@@ -14,20 +14,18 @@
 //ant.echo("Copying over plugin files: index.gsp and layouts/main.gsp")
 
 try {
-    File alaConfigFile = new File(new File(new File(basedir, "grails-app"), "conf"), "ala-config.groovy")
-    def toConfFile =  "${basedir}/grails-app/conf/ala-config.groovy"
     File layoutFile = new File(new File(new File(basedir, "grails-app"), "views/layouts"), "main.gsp")
     def toLayoutFile =  "${basedir}/grails-app/views/layouts/main.gsp"
     File indexFile = new File(new File(new File(basedir, "grails-app"), "views"), "index.gsp")
     def toIndexFile =  "${basedir}/grails-app/views/index.gsp"
 
-    if (alaConfigFile.exists() && layoutFile.exists() && indexFile.exists()) {
-        // assume plugin has been installed previously or files are present via SVN
-        ant.echo("Plugin files already present - appending with .new")
-        toConfFile += ".new"
-        //toLayoutFile += ".new"
+    if (layoutFile.exists()) {
+        toLayoutFile += ".new"
+    }
+    if (indexFile.exists()) {
         toIndexFile += ".new"
-    } else {
+    }
+    if (!(layoutFile.exists() && indexFile.exists())) {
         // assume first time installation - backup original files first
         if (layoutFile.exists()) {
             ant.copy(file: "${basedir}/grails-app/views/layouts/main.gsp",

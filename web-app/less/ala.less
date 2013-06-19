@@ -56,6 +56,10 @@ h4 { font-size: @baseFontSize * 1.25; }
     }
 }
 
+form {
+    margin: 0;
+}
+
 // ALA orange button. Usage: <foo class="btn btn-ala"/>
 .btn-ala {
     .buttonBackground(@alaOrange, @alaOrangeDark);
@@ -96,9 +100,6 @@ h4 { font-size: @baseFontSize * 1.25; }
             margin-top: 8px;
             margin-left: 15px;
         }
-        form {
-            margin:0;
-        }
         #search-2013 {
             width:240px;
         }
@@ -134,6 +135,8 @@ h4 { font-size: @baseFontSize * 1.25; }
     padding-left: 20px;
     background-color: @alaOrange;
     background-image: none; //border-bottom: 1px solid @alaOrangeDark;
+    filter: none; // IE8 fix
+    -ms-filter: none; // IE8 fix
     .nav > li > a {
         .orange-nav-bar;
         padding: 9px 13px 9px;
