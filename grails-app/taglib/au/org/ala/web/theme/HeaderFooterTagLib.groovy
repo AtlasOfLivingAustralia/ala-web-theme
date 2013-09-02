@@ -80,6 +80,24 @@ class HeaderFooterTagLib {
     }
 
     /**
+     * Generate the login/logout link
+     *
+     * @attr cssClass - CSS class to add to a tag
+     *
+     * plus
+     * @attr logoutUrl the local url that should invalidate the session and redirect to the auth
+     *  logout url - defaults to {CH.config.grails.serverURL}/session/logout
+     * @attr loginReturnToUrl where to go after logging in - defaults to current page
+     * @attr logoutReturnToUrl where to go after logging out - defaults to current page
+     * @attr loginReturnUrl where to go after login - defaults to current page
+     * @attr casLoginUrl - defaults to {CH.config.security.cas.loginUrl}
+     * @attr casLogoutUrl - defaults to {CH.config.security.cas.logoutUrl}
+     * @attr ignoreCookie - if true the helper cookie will not be used to determine login - defaults to false
+     */
+    def loginLogout = { attrs ->
+        out << buildLoginoutLink(attrs)
+    }
+    /**
      * Get the content from cache of the web.
      * @param which specifies the include
      * @param attrs any specified params
@@ -156,10 +174,11 @@ class HeaderFooterTagLib {
                 request.userPrincipal) {
             return "<a href='${logoutUrl}" +
                     "?casUrl=${casLogoutUrl}" +
-                    "&appUrl=${logoutReturnToUrl}'>Logout</a>"
+                    "&appUrl=${logoutReturnToUrl}' " +
+                    "class='${attrs.cssClass}'>Logout</a>"
         } else {
             // currently logged out
-            return "<a href='${casLoginUrl}?service=${loginReturnToUrl}'><span>Log in</span></a>"
+            return "<a href='${casLoginUrl}?service=${loginReturnToUrl}' class='${attrs.cssClass}'><span>Log in</span></a>"
         }
     }
 

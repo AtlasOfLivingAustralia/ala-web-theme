@@ -144,6 +144,33 @@ made to `ala.less` and then CSS files generated with provided script (see README
     def doWithSpring = {
         //System.println("Merging conf...")
         //mergeConfig(application)
+        def config = application.config
+
+        if (!config.userDetails.url) {
+            config.userDetails.url = "http://auth.ala.org.au/userdetails/userDetails/"
+        }
+
+        if (!config.userDetails.path) {
+            config.userDetails.path = "getUserListFull"
+        }
+
+        if (!config.grails.cache.config) {
+            config.grails.cache.config = {
+                defaults {
+                    eternal false
+                    overflowToDisk false
+                    maxElementsInMemory 20000
+                    timeToLiveSeconds 3600
+                }
+                cache {
+                    name 'userListCache'
+                }
+                cache {
+                    name 'userMapCache'
+                }
+
+            }
+        }
     }
 
     def doWithDynamicMethods = { ctx ->

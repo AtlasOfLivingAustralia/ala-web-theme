@@ -30,6 +30,9 @@ grails.project.dependency.resolution = {
                 version:'1.0-SNAPSHOT',
                 transitive:false
         compile 'org.jasig.cas.client:cas-client-core:3.1.12'
+        compile('org.codehaus.groovy.modules.http-builder:http-builder:0.5.0') {
+             excludes "commons-logging", "xml-apis", "groovy"
+        }
     }
 
     plugins {
@@ -39,6 +42,7 @@ grails.project.dependency.resolution = {
                 ":release:2.0.3") {
             export = false
         }
+        compile ":cache-ehcache:1.0.0"
     }
 }
 
