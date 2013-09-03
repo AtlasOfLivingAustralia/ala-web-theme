@@ -2,8 +2,8 @@ package au.org.ala.web
 
 import au.org.ala.cas.util.AuthenticationCookieUtils
 import org.apache.commons.lang.StringUtils
-import org.codehaus.groovy.grails.web.json.JSONArray
-import org.codehaus.groovy.grails.web.json.JSONObject
+import net.sf.json.JSONArray
+import net.sf.json.JSONObject
 import org.springframework.cache.annotation.Cacheable
 import org.springframework.web.context.request.RequestContextHolder
 
@@ -89,7 +89,7 @@ class AuthService {
                 log.info "error -  " + userListJson.getClass() + ":"+ StringUtils.abbreviate(userListJson, 100)
             }
         } catch (Exception e) {
-            log.error "Cache refresh error" + e.message
+            log.error "Cache refresh error: " + e.message, e
         }
 
         return userListMap
@@ -117,7 +117,7 @@ class AuthService {
                 log.info "error -  " + userListJson.getClass() + ":"+ StringUtils.abbreviate(userListJson, 100)
             }
         } catch (Exception e) {
-            log.error "Cache refresh error" + e.message
+            log.error "Cache refresh error: " + e.message, e
         }
 
         return userList

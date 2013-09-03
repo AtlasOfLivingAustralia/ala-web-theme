@@ -17,7 +17,7 @@
     <style type="text/css" media="screen">
     </style>
 </head>
-<body>
+<body class="nav-">
 <h1>Test Page for AUTH</h1>
 <div>
     <hf:loginLogout cssClass="btn"/> ${request.userPrincipal}

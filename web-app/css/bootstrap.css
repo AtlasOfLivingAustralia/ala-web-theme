@@ -5280,6 +5280,9 @@ h4 {
 .breadcrumb > .active {
   color: #555555;
 }
+form {
+  margin: 0;
+}
 .btn-ala {
   color: #ffffff;
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
@@ -5349,9 +5352,6 @@ h4 {
   margin-top: 8px;
   margin-left: 15px;
 }
-#site-header .navbar-inner form {
-  margin: 0;
-}
 #site-header .navbar-inner #search-2013 {
   width: 240px;
 }
@@ -5383,6 +5383,8 @@ h4 {
   padding-left: 20px;
   background-color: #df4a21;
   background-image: none;
+  filter: none;
+  -ms-filter: none;
 }
 #nav-site .navbar-inner .nav > li > a {
   background-color: #df4a21;
@@ -5401,17 +5403,28 @@ h4 {
 #nav-site .navbar-inner .nav > li > a:hover {
   background-color: #333a3f;
 }
-#nav-site .navbar-inner .nav > .active > a {
-  background-color: #df4a21;
-  border-left: 1px solid #df4a21;
-  border-right: 1px solid #df4a21;
-  border-collapse: collapse;
-  color: #ffffff;
-  -webkit-box-shadow: none;
-  -moz-box-shadow: none;
-  box-shadow: none;
-  text-shadow: none;
-  font-size: 14px;
+body.nav-species #nav-site .navbar-inner .nav > li.nav-species > a {
+  background-color: #333a3f;
+}
+body.nav-locations #nav-site .navbar-inner .nav > li.nav-locations > a {
+  background-color: #333a3f;
+}
+body.nav-collections #nav-site .navbar-inner .nav > li.nav-collections > a {
+  background-color: #333a3f;
+}
+body.nav-mapping #nav-site .navbar-inner .nav > li.nav-mapping > a {
+  background-color: #333a3f;
+}
+body.nav-datasets #nav-site .navbar-inner .nav > li.nav-datasets > a {
+  background-color: #333a3f;
+}
+body.nav-blogs #nav-site .navbar-inner .nav > li.nav-blogs > a {
+  background-color: #333a3f;
+}
+body.nav-getinvolved #nav-site .navbar-inner .nav > li.nav-getinvolved > a {
+  background-color: #333a3f;
+}
+body.nav-about #nav-site .navbar-inner .nav > li.nav-about > a {
   background-color: #333a3f;
 }
 #nav-site .navbar-inner .dropdown-menu {
@@ -5433,6 +5446,9 @@ h4 {
 #nav-site .navbar-inner .caret {
   border-top-color: white !important;
   border-bottom-color: white !important;
+}
+body[class*='nav-'] .nav > li[class*='nav-'] > a {
+  background-color: #333a3f;
 }
 footer {
   margin-top: 20px;

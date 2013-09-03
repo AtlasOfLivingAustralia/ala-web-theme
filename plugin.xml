@@ -13,6 +13,7 @@ made to `ala.less` and then CSS files generated with provided script (see README
     <resource>AlaWebThemeResources</resource>
     <resource>au.org.ala.web.LogoutController</resource>
     <resource>au.org.ala.web.AuthService</resource>
+    <resource>au.org.ala.web.HttpWebService</resource>
     <resource>au.org.ala.web.theme.HeaderFooterTagLib</resource>
   </resources>
   <repositories>
@@ -24,9 +25,13 @@ made to `ala.less` and then CSS files generated with provided script (see README
     <compile>
       <dependency group='org.jasig.cas.client' name='cas-client-core' version='3.1.12' />
       <dependency group='au.org.ala' name='ala-cas-client' version='1.0-SNAPSHOT' />
+      <dependency group='org.codehaus.groovy.modules.http-builder' name='http-builder' version='0.5.0' />
     </compile>
   </dependencies>
   <plugins>
+    <compile>
+      <plugin group='org.grails.plugins' name='cache-ehcache' version='1.0.0' />
+    </compile>
     <runtime>
       <plugin group='org.grails.plugins' name='resources' version='1.1.6' />
       <plugin group='org.grails.plugins' name='jquery' version='1.7.1' />

@@ -147,11 +147,33 @@ form {
             //text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.8);
         }
     }
-    .nav > .active > a {
-        .orange-nav-bar;
+
+    // body class used to set active menu
+    body.nav-species & .nav > li.nav-species > a {
         background-color: @headerGreyDark;
-        //text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.8);
     }
+    body.nav-locations & .nav > li.nav-locations > a {
+        background-color: @headerGreyDark;
+    }
+    body.nav-collections & .nav > li.nav-collections > a {
+        background-color: @headerGreyDark;
+    }
+    body.nav-mapping & .nav > li.nav-mapping > a {
+        background-color: @headerGreyDark;
+    }
+    body.nav-datasets & .nav > li.nav-datasets > a {
+        background-color: @headerGreyDark;
+    }
+    body.nav-blogs & .nav > li.nav-blogs > a {
+        background-color: @headerGreyDark;
+    }
+    body.nav-getinvolved & .nav > li.nav-getinvolved > a {
+        background-color: @headerGreyDark;
+    }
+    body.nav-about & .nav > li.nav-about > a {
+        background-color: @headerGreyDark;
+    }
+
     .dropdown-menu {
         color: @white;
         background-color: @alaOrange;
@@ -174,6 +196,11 @@ form {
         border-top-color: white !important;
         border-bottom-color: white !important;
     }
+}
+
+// body class to set active tab in menu
+body[class*='nav-'] .nav > li[class*='nav-'] > a {
+    background-color: @headerGreyDark;
 }
 
 // ALA footer
