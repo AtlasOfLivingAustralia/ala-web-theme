@@ -41,7 +41,7 @@ class AuthService {
         }
     }
 
-    protected boolean userInRole(role) {
+    public boolean userInRole(role) {
         log.debug("userInRole: " + RequestContextHolder.currentRequestAttributes()?.isUserInRole(role))
         return grailsApplication.config.security.cas.bypass ||
                 RequestContextHolder.currentRequestAttributes()?.isUserInRole(role) // || isAdmin()
@@ -49,11 +49,17 @@ class AuthService {
 
     def userDetails() {
         def attr = RequestContextHolder.currentRequestAttributes()?.getUserPrincipal()?.attributes
-        [
-                userId:attr?.userid?.toString(),
-                email: attr?.email?.toString()?.toLowerCase(),
-                userDisplayName: "${attr?.firstname?:""} ${attr?.lastname?:""}".trim()
-        ]
+        def details = null
+
+        if (attr) {
+            details = [
+                    userId:attr?.userid?.toString(),
+                    email: attr?.email?.toString()?.toLowerCase(),
+                    userDisplayName: "${attr?.firstname?:""} ${attr?.lastname?:""}".trim()
+            ]
+        }
+
+        details
     }
 
     UserDetails getUserForUserId(String userId) {
