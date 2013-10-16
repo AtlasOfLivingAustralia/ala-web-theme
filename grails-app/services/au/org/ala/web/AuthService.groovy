@@ -63,6 +63,7 @@ class AuthService {
     }
 
     UserDetails getUserForUserId(String userId) {
+        // NOTE: the following method call will NOT be cached as caching only works from external classes
         Map<String, UserDetails> um = getAllUserNameMap()
         UserDetails ud = null;
 
