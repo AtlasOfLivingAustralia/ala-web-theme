@@ -93,7 +93,7 @@ class AuthService {
                     userListMap.put(String.valueOf(user.id), userDetails);
                 }
             } else {
-                log.info "error -  " + userListJson.getClass() + ":"+ StringUtils.abbreviate(userListJson, 100)
+                log.info "error -  " + userListJson.getClass() + ": ${userListJson}"
             }
         } catch (Exception e) {
             log.error "Cache refresh error: " + e.message, e
@@ -121,7 +121,7 @@ class AuthService {
                     userList.add(userDetails);
                 }
             } else {
-                log.info "error -  " + userListJson.getClass() + ":"+ StringUtils.abbreviate(userListJson, 100)
+                log.info "error -  " + userListJson.getClass() + ": ${userListJson}"
             }
         } catch (Exception e) {
             log.error "Cache refresh error: " + e.message, e
