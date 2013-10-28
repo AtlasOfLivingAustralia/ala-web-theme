@@ -5,7 +5,7 @@
     <meta name="section" content="home"/>
     <title>ALA Web Theme - Home</title>
 </head>
-<body>
+<body class="nav-about nav-species">
 %{--<a href="#page-body" class="skip"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>--}%
 <div class="row-fluid">
     <div class="span3 well" id="status" role="complementary">

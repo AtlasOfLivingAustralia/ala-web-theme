@@ -38,9 +38,9 @@ grails.project.dependency.resolution = {
 
     plugins {
         runtime ":jquery:1.7.1"
-        runtime ":resources:1.1.6"
+        runtime ":resources:1.2.1"
         compile(":tomcat:$grailsVersion",
-                ":release:2.0.3") {
+                ":release:2.2.1") {
             export = false
         }
         compile ":cache-ehcache:1.0.0"
