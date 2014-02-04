@@ -3,7 +3,7 @@ import grails.util.Holders
 
 class AlaWebThemeGrailsPlugin {
     // the plugin version
-    def version = "0.2.0"
+    def version = "0.2.2"
     // the version or versions of Grails the plugin is designed for
     def grailsVersion = "2.1 > *"
     // the other plugins this plugin depends on
@@ -48,34 +48,10 @@ made to `ala.less` and then CSS files generated with provided script (see README
         def mappingElement = xml.'context-param'
         def lastMapping = mappingElement[mappingElement.size()-1]
         lastMapping + {
-            'context-param' {
-                'param-name' ('serverName')
-                'param-value' (Holders.config.security.cas.appServerName)
-            }
-            'context-param' {
-                'param-name' ('casServerName')
-                'param-value' (Holders.config.security.cas.casServerName)
-            }
-            'context-param' {
-                'param-name' ('uriFilterPattern')
-                'param-value' (Holders.config.security.cas.uriFilterPattern)
-            }
-            'context-param' {
-                'param-name' ('uriExclusionFilterPattern')
-                'param-value' (Holders.config.security.cas.uriExclusionFilterPattern)
-            }
-            'context-param' {
-                'param-name' ('authenticateOnlyIfLoggedInFilterPattern')
-                'param-value' (Holders.config.security.cas.authenticateOnlyIfLoggedInPattern)
-            }
-        }
-
-        if (Holders.config.security.cas.contextPath) {
-            lastMapping + {
-                'context-param' {
-                    'param-name' ('contextPath')
-                    'param-value' (Holders.config.security.cas.contextPath)
-                }
+            'env-entry' {
+                'env-entry-name' ('configPropFile')
+                'env-entry-value' (Holders.config.default_config)
+                'env-entry-type' ('java.lang.String')
             }
         }
 

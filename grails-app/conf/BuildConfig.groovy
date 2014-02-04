@@ -31,7 +31,7 @@ grails.project.dependency.resolution = {
         // runtime 'mysql:mysql-connector-java:5.1.18'
         compile group:'au.org.ala',
                 name:'ala-cas-client',
-                version:'1.0-SNAPSHOT',
+                version:'2.0-SNAPSHOT',
                 transitive:false
         compile 'org.jasig.cas.client:cas-client-core:3.1.12'
     }

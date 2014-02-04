@@ -1,4 +1,4 @@
-<plugin name='ala-web-theme' version='0.2.0' grailsVersion='2.1 &gt; *'>
+<plugin name='ala-web-theme' version='0.2.2' grailsVersion='2.1 &gt; *'>
   <author>Nick dos Remedios</author>
   <authorEmail>nick.dosremedios@csiro.au</authorEmail>
   <title>Ala Web Theme Plugin</title>
@@ -21,20 +21,21 @@ made to `ala.less` and then CSS files generated with provided script (see README
     <repository name='mavenCentral' url='http://repo1.maven.org/maven2/' />
     <repository name='http://maven.ala.org.au/repository' url='http://maven.ala.org.au/repository/' />
     <repository name='Codehaus' url='http://repository.codehaus.org/' />
+    <repository name='http://grails.org/plugins' url='http://grails.org/plugins' />
   </repositories>
   <dependencies>
     <compile>
       <dependency group='org.jasig.cas.client' name='cas-client-core' version='3.1.12' />
-      <dependency group='au.org.ala' name='ala-cas-client' version='1.0-SNAPSHOT' />
+      <dependency group='au.org.ala' name='ala-cas-client' version='2.0-SNAPSHOT' />
     </compile>
   </dependencies>
   <plugins>
     <compile>
-      <plugin group='org.grails.plugins' name='rest' version='0.7' />
       <plugin group='org.grails.plugins' name='cache-ehcache' version='1.0.0' />
+      <plugin group='org.grails.plugins' name='rest' version='0.7' />
     </compile>
     <runtime>
-      <plugin group='org.grails.plugins' name='resources' version='1.1.6' />
+      <plugin group='org.grails.plugins' name='resources' version='1.2.1' />
       <plugin group='org.grails.plugins' name='jquery' version='1.7.1' />
     </runtime>
   </plugins>
