@@ -37,6 +37,7 @@ class HeaderFooterTagLib {
      * @attr casLoginUrl - defaults to {CH.config.security.cas.loginUrl}
      * @attr casLogoutUrl - defaults to {CH.config.security.cas.logoutUrl}
      * @attr ignoreCookie - if true the helper cookie will not be used to determine login - defaults to false
+     * @attr fluidLayout - if true the BS CSS class of "container" is changed to "container-fluid"
      */
     def banner = { attrs ->
         out << load('banner2', attrs)
@@ -45,13 +46,15 @@ class HeaderFooterTagLib {
     /**
      * Display the main menu.
      *
-     * Note that highlighting of the current menu item is done by including the apropriate class in the
+     * Note that highlighting of the current menu item is done by including the appropriate class in the
      * body tag, eg class="collections".
      *
      * Usage: <hf:menu/>
+     *
+     * @attr fluidLayout - if true the BS CSS class of "container" is changed to "container-fluid"
      */
-    def menu = {
-        out << load('menu', [:])
+    def menu = { attrs ->
+        out << load('menu', attrs)
     }
 
     /**
@@ -149,6 +152,9 @@ class HeaderFooterTagLib {
         content = content.replaceAll(/::centralServer::/, alaBaseURL)
         content = content.replaceAll(/::searchServer::/, bieBaseURL) // change for BIE to grailServerURL
         content = content.replaceAll(/::searchPath::/, bieSearchPath)
+        if (attrs.fluidLayout) {
+            content = content.replaceAll('class="container"', 'class="container-fluid"')
+        }
         if (content =~ "::loginLogoutListItem::") {
             // only do the work if it is needed
             content = content.replaceAll(/::loginLogoutListItem::/, buildLoginoutLink(attrs))

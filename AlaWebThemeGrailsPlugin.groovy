@@ -3,7 +3,7 @@ import grails.util.Holders
 
 class AlaWebThemeGrailsPlugin {
     // the plugin version
-    def version = "0.2.2"
+    def version = "0.2-SNAPSHOT"
     // the version or versions of Grails the plugin is designed for
     def grailsVersion = "2.1 > *"
     // the other plugins this plugin depends on
@@ -47,11 +47,49 @@ made to `ala.less` and then CSS files generated with provided script (see README
     def doWithWebDescriptor = { xml ->
         def mappingElement = xml.'context-param'
         def lastMapping = mappingElement[mappingElement.size()-1]
-        lastMapping + {
-            'env-entry' {
-                'env-entry-name' ('configPropFile')
-                'env-entry-value' (Holders.config.default_config)
-                'env-entry-type' ('java.lang.String')
+        String defaultConfig = Holders.config.default_config
+
+        if (new File(defaultConfig).exists()) {
+            // Use `configPropFile` external config which is read by ala-cas-client-2.0-SNAPSHOT.jar
+            lastMapping + {
+                'env-entry' {
+                    'env-entry-name' ('configPropFile')
+                    'env-entry-value' (defaultConfig)
+                    'env-entry-type' ('java.lang.String')
+                }
+            }
+        } else {
+            // default_config file not found - use security.cas.* settings instead
+            lastMapping + {
+                'context-param' {
+                    'param-name' ('serverName')
+                    'param-value' (Holders.config.security.cas.appServerName)
+                }
+                'context-param' {
+                    'param-name' ('casServerName')
+                    'param-value' (Holders.config.security.cas.casServerName)
+                }
+                'context-param' {
+                    'param-name' ('uriFilterPattern')
+                    'param-value' (Holders.config.security.cas.uriFilterPattern)
+                }
+                'context-param' {
+                    'param-name' ('uriExclusionFilterPattern')
+                    'param-value' (Holders.config.security.cas.uriExclusionFilterPattern)
+                }
+                'context-param' {
+                    'param-name' ('authenticateOnlyIfLoggedInFilterPattern')
+                    'param-value' (Holders.config.security.cas.authenticateOnlyIfLoggedInPattern)
+                }
+            }
+
+            if (Holders.config.security.cas.contextPath) {
+                lastMapping + {
+                    'context-param' {
+                        'param-name' ('contextPath')
+                        'param-value' (Holders.config.security.cas.contextPath)
+                    }
+                }
             }
         }
 
@@ -76,6 +114,10 @@ made to `ala.less` and then CSS files generated with provided script (see README
                 'init-param' {
                     'param-name' ('gateway')
                     'param-value' ('false')
+                }
+                'init-param' {
+                    'param-name' ('disableCAS')
+                    'param-value' (Holders.config.security.cas.bypass == true ? 'true' : 'true')
                 }
             }
             'filter' {
@@ -114,6 +156,10 @@ made to `ala.less` and then CSS files generated with provided script (see README
                 'filter-name' ('CAS HttpServletRequest Wrapper Filter')
                 'url-pattern' ('/*')
             }
+        }
+
+        if (Holders.config.security.cas.debugWebXml) {
+            println "web.xml = ${mappingElement}"
         }
     }
 
