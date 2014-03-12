@@ -117,7 +117,7 @@ made to `ala.less` and then CSS files generated with provided script (see README
                 }
                 'init-param' {
                     'param-name' ('disableCAS')
-                    'param-value' (Holders.config.security.cas.bypass == true ? 'true' : 'true')
+                    'param-value' (Holders.config.security.cas.bypass == true ? 'true' : 'false')
                 }
             }
             'filter' {
