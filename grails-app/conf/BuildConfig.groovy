@@ -48,7 +48,7 @@ grails.project.dependency.resolution = {
         }
         compile ":cache-ehcache:1.0.0"
         compile ":rest:0.7"
-        compile ":svn:1.0.4-ALA"
+        compile ":svn:1.0.2"
     }
 }
 
