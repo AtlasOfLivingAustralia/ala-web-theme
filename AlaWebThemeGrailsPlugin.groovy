@@ -54,6 +54,11 @@ made to `ala.less` and then CSS files generated with provided script (see README
             }
         } else {
             // default_config file not found - use security.cas.* settings instead
+            if (!Holders.config.security.cas || Holders.config.security.cas.size() == 0) {
+                println "No security.cas.* settings found (or external conf found) - setting bypass = true"
+                Holders.config.security.cas.bypass = true
+            }
+
             lastMapping + {
                 'context-param' {
                     'param-name' ('serverName')
@@ -122,6 +127,10 @@ made to `ala.less` and then CSS files generated with provided script (see README
                     'param-value' ('org.jasig.cas.client.validation.Cas20ProxyReceivingTicketValidationFilter')
                 }
                 'init-param' {
+                    'param-name' ('disableCAS')
+                    'param-value' (Holders.config.security.cas.bypass == true ? 'true' : 'false')
+                }
+                'init-param' {
                     'param-name' ('casServerUrlPrefix')
                     'param-value' (Holders.config.security.cas.casServerUrlPrefix)
                 }
@@ -132,6 +141,10 @@ made to `ala.less` and then CSS files generated with provided script (see README
                 'init-param' {
                     'param-name' ('filterClass')
                     'param-value' ('au.org.ala.cas.client.AlaHttpServletRequestWrapperFilter')
+                }
+                'init-param' {
+                    'param-name' ('disableCAS')
+                    'param-value' (Holders.config.security.cas.bypass == true ? 'true' : 'false')
                 }
             }
             'filter-mapping' {
