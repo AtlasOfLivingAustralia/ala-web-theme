@@ -25,6 +25,7 @@ grails.project.dependency.resolution = {
         //mavenRepo "http://download.java.net/maven/2/"
         //mavenRepo "http://repository.jboss.com/maven2/"
         mavenRepo "http://maven.ala.org.au/repository"
+        mavenRepo "http://maven.tmatesoft.com/content/repositories/releases/"
     }
     dependencies {
         // specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes eg.
@@ -34,6 +35,7 @@ grails.project.dependency.resolution = {
                 version:'2.0',
                 transitive:false
         compile 'org.jasig.cas.client:cas-client-core:3.1.12'
+        compile "org.tmatesoft.svnkit:svnkit:1.8.5"
     }
 
     plugins {
@@ -45,6 +47,7 @@ grails.project.dependency.resolution = {
         }
         compile ":cache-ehcache:1.0.0"
         compile ":rest:0.7"
+        compile ":svn:1.0.2"
     }
 }
 

@@ -1,19 +1,15 @@
-import grails.util.Environment
 import grails.util.Holders
 
 class AlaWebThemeGrailsPlugin {
     // the plugin version
-    def version = "0.2.4-SNAPSHOT"
+    def version = "0.2.4"
     // the version or versions of Grails the plugin is designed for
     def grailsVersion = "2.1 > *"
     // the other plugins this plugin depends on
     def dependsOn = [:]
     // resources that are excluded from plugin packaging
-    def pluginExcludes = [
-        "grails-app/views/error.gsp"
-    ]
+    def pluginExcludes = ["grails-app/views/error.gsp"]
 
-    // TODO Fill in these fields
     def title = "Ala Web Theme Plugin" // Headline display name of the plugin
     def author = "Nick dos Remedios"
     def authorEmail = "nick.dosremedios@csiro.au"
@@ -27,10 +23,8 @@ made to `ala.less` and then CSS files generated with provided script (see README
     // URL to the plugin's documentation
     def documentation = "http://code.google.com/p/ala/wiki/AlaWebTheme"
 
-    // Extra (optional) plugin metadata
-
     // License: one of 'APACHE', 'GPL2', 'GPL3'
-    def license = "APACHE"
+    def license = "MOZILLA"
 
     // Details of company behind the plugin (if there is one)
     def organization = [ name: "Atlas of Living Australia", url: "http://www.ala.org.au/" ]
@@ -196,25 +190,17 @@ made to `ala.less` and then CSS files generated with provided script (see README
     }
 
     def doWithDynamicMethods = { ctx ->
-        // TODO Implement registering dynamic methods to classes (optional)
     }
 
     def doWithApplicationContext = { applicationContext ->
-
     }
 
     def onChange = { event ->
-        // TODO Implement code that is executed when any artefact that this plugin is
-        // watching is modified and reloaded. The event contains: event.source,
-        // event.application, event.manager, event.ctx, and event.plugin.
     }
 
     def onConfigChange = { event ->
-        // TODO Implement code that is executed when the project configuration changes.
-        // The event is the same as for 'onChange'.
     }
 
     def onShutdown = { event ->
-        // TODO Implement code that is executed when the application shuts down (optional)
     }
 }
