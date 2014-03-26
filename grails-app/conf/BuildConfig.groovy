@@ -5,6 +5,7 @@ grails.servlet.version = "2.5"
 grails.project.work.dir = "target"
 grails.project.target.level = 1.6
 grails.project.source.level = 1.6
+grails.project.scm.tagdir = "../tags/ala-web-theme"
 
 grails.project.dependency.resolution = {
     //legacyResolve true // if using Grails > 2.2
@@ -47,7 +48,7 @@ grails.project.dependency.resolution = {
         }
         compile ":cache-ehcache:1.0.0"
         compile ":rest:0.7"
-        compile ":svn:1.0.2"
+        compile ":svn:1.0.4-ALA"
     }
 }
 
