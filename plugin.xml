@@ -11,9 +11,11 @@ made to `ala.less` and then CSS files generated with provided script (see README
   <type>AlaWebThemeGrailsPlugin</type>
   <resources>
     <resource>AlaWebThemeResources</resource>
+    <resource>au.org.ala.web.AuthTestController</resource>
     <resource>au.org.ala.web.LogoutController</resource>
     <resource>au.org.ala.web.AuthService</resource>
     <resource>au.org.ala.web.HttpWebService</resource>
+    <resource>au.org.ala.web.UserListService</resource>
     <resource>au.org.ala.web.theme.HeaderFooterTagLib</resource>
   </resources>
 </plugin>
