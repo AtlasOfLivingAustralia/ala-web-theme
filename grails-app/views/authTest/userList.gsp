@@ -1,10 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: dos009@csiro.au
-  Date: 27/08/13
-  Time: 3:09 PM
-  To change this template use File | Settings | File Templates.
---%>
 <%
     def authService = applicationContext.authService
 %>
@@ -18,12 +11,8 @@
     </style>
 </head>
 <body class="nav-datasets">
-<h1>Test Page for AUTH</h1>
+<h1>AUTH User List</h1>
 <div>
-    <hf:loginLogout cssClass="btn"/> ${request.userPrincipal}
-</div>
-<div>
-    <h4>AUTH users</h4>
     <table class="table table-bordered table-striped table-condensed">
         <thead>
             <tr>

@@ -1,50 +1,53 @@
 package au.org.ala.web
 
 import au.org.ala.cas.util.AuthenticationCookieUtils
+import au.org.ala.cas.util.AuthenticationUtils
 import org.apache.commons.lang.StringUtils
 import net.sf.json.JSONArray
 import net.sf.json.JSONObject
 import org.springframework.cache.annotation.Cacheable
 import org.springframework.web.context.request.RequestContextHolder
 
+import javax.servlet.http.HttpServletRequest
+
 class AuthService {
+
     static transactional = false
 
-    def httpWebService, grailsApplication
+    def grailsApplication
+    def userListService
+
 
     def getEmail() {
-        def email = RequestContextHolder.currentRequestAttributes()?.getUserPrincipal()?.attributes?.email
-
-        if (!email) {
-            email  = AuthenticationCookieUtils.getUserName(RequestContextHolder.currentRequestAttributes().getRequest())
-        }
-
-        email
+        return AuthenticationUtils.getEmailAddress(RequestContextHolder.currentRequestAttributes().getRequest())
     }
 
     def getUserId() {
-        def userId = RequestContextHolder.currentRequestAttributes()?.getUserPrincipal()?.attributes?.userid
-
+        def request = RequestContextHolder.currentRequestAttributes().getRequest() as HttpServletRequest
+        def userId = AuthenticationUtils.getUserId(request)
         if (!userId) {
-            userId = AuthenticationCookieUtils.getUserName(RequestContextHolder.currentRequestAttributes().getRequest())
+            // try the email address, and working backwards from there
+            def emailAddress = AuthenticationUtils.getEmailAddress(request)
+            if (emailAddress) {
+                def user = getUserForEmailAddress(emailAddress)
+                if (user) {
+                    userId = user.userId
+                }
+            }
         }
-
-        userId
+        return userId
     }
 
     def getDisplayName() {
-        if(RequestContextHolder.currentRequestAttributes()?.getUserPrincipal()?.attributes?.firstname){
-            ((RequestContextHolder.currentRequestAttributes()?.getUserPrincipal()?.attributes?.firstname) +
-                    " " + (RequestContextHolder.currentRequestAttributes()?.getUserPrincipal()?.attributes?.lastname))
-        } else {
-            null
-        }
+        return AuthenticationUtils.getDisplayName(RequestContextHolder.currentRequestAttributes().getRequest())
     }
 
     public boolean userInRole(role) {
-        log.debug("userInRole: " + RequestContextHolder.currentRequestAttributes()?.isUserInRole(role))
-        return grailsApplication.config.security.cas.bypass ||
-                RequestContextHolder.currentRequestAttributes()?.isUserInRole(role) // || isAdmin()
+
+        def inRole = AuthenticationUtils.isUserInRole(RequestContextHolder.currentRequestAttributes().getRequest(), role)
+        def bypass = grailsApplication.config.security.cas.bypass
+        log.debug("userInRole(${role}) - ${inRole} (bypassing CAS - ${bypass})")
+        return bypass || inRole
     }
 
     def userDetails() {
@@ -53,9 +56,9 @@ class AuthService {
 
         if (attr) {
             details = [
-                    userId:attr?.userid?.toString(),
-                    email: attr?.email?.toString()?.toLowerCase(),
-                    userDisplayName: "${attr?.firstname?:""} ${attr?.lastname?:""}".trim()
+                userId:attr?.userid?.toString(),
+                email: attr?.email?.toString()?.toLowerCase(),
+                userDisplayName: "${attr?.firstname?:""} ${attr?.lastname?:""}".trim()
             ]
         }
 
@@ -63,7 +66,7 @@ class AuthService {
     }
 
     UserDetails getUserForUserId(String userId) {
-        // NOTE: the following method call will NOT be cached as caching only works from external classes
+        // TODO: replace this implementation with web service call
         Map<String, UserDetails> um = getAllUserNameMap()
         UserDetails ud = null;
 
@@ -74,13 +77,20 @@ class AuthService {
         return ud
     }
 
-    @Cacheable("userMapCache")
+    UserDetails getUserForEmailAddress(String emailAddress) {
+        // TODO: replace this implementation with web service call
+        Map<String, UserDetails> um = getAllUserNameMap()
+
+        return um.values().find {
+            it.userName?.equalsIgnoreCase(emailAddress)
+        }
+    }
+
     Map<String, UserDetails> getAllUserNameMap() {
         def userListMap = [:]
-        checkConfig()
-        try {
-            def userListJson = httpWebService.doJsonPost(grailsApplication.config.userDetails.url, grailsApplication.config.userDetails.path, "", "")
 
+        try {
+            def userListJson = userListService.getFullUserList()
             if (userListJson instanceof JSONObject) {
                 // works with path = getUserListWithIds
                 userListJson.keySet().each { id ->
@@ -102,13 +112,11 @@ class AuthService {
         return userListMap
     }
 
-    @Cacheable("userListCache")
+
     def getAllUserNameList() {
         def userList = []
-        checkConfig()
         try {
-            def userListJson = httpWebService.doJsonPost(grailsApplication.config.userDetails.url, grailsApplication.config.userDetails.path, "", "")
-
+            def userListJson = userListService.getFullUserList()
             if (userListJson instanceof JSONObject) {
                 // works with path = getUserListWithIds
                 userListJson.keySet().each { id ->
@@ -130,12 +138,4 @@ class AuthService {
         return userList
     }
 
-    def checkConfig() {
-        if (!grailsApplication.config.userDetails.url) {
-            log.error "Required config not found: userDetails.url - please add to Config.groovy"
-        }
-        if (!grailsApplication.config.userDetails.path) {
-            log.error "Required config not found: userDetails.path - please add to Config.groovy"
-        }
-    }
 }

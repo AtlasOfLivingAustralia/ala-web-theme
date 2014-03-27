@@ -8,6 +8,7 @@ import org.codehaus.groovy.grails.web.json.JSONObject
 import org.springframework.beans.factory.InitializingBean
 
 class HttpWebService implements InitializingBean {
+
     static transactional = false
 
     public void afterPropertiesSet() {
