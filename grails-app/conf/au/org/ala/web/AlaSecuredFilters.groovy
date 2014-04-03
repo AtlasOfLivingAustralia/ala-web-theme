@@ -57,6 +57,10 @@ class AlaSecuredFilters {
 
                         if (params.returnTo) {
                             redirect(url: params.returnTo)
+                        } else if (sa.statusCode() != 0) {
+                            render(status: sa.statusCode())
+                        } else if (sa.redirectUri()) {
+                            redirect(uri: sa.redirectUri())
                         } else {
                             def redirectController =  sa.redirectController()
                             if (!redirectController) {

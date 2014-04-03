@@ -16,21 +16,40 @@ public @interface AlaSecured {
     /**
      * A list of roles that the user must have to have access to the method
      */
-    public abstract String[] value();
+    public String[] value();
 
     /**
      * Change the behaviour such that the user must have only one role from the roles list to have access to the method
      */
-    public abstract boolean anyRole() default false;
+    public boolean anyRole() default false;
 
     /**
      * Change the behaviour such that the user must *not* have any roles from the roles list to have access to the method
      */
-    public abstract boolean notRoles() default false;
+    public boolean notRoles() default false;
 
-    public abstract String redirectController() default "";
+    /**
+     * Name of the controller to redirect to, defaults to current controller
+     */
+    public String redirectController() default "";
 
-    public abstract String redirectAction() default "index";
+    /**
+     * Name of the action to redirect to, defaults to index
+     */
+    public String redirectAction() default "index";
 
-    public abstract String message() default "Permission denied";
+    /**
+     * The context relative uri to redirect to, this takes precedent over the controller if specified.
+     */
+    public String redirectUri() default "";
+
+    /**
+     * Status code to return instead of redirecting, takes precendence over Uri if specified
+     */
+    public int statusCode() default 0;
+
+    /**
+     * The message to put in flashScope.errorMessage, set to null to disable.
+     */
+    public String message() default "Permission denied";
 }
