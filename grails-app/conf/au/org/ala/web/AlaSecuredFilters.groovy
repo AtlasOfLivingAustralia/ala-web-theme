@@ -17,6 +17,11 @@ class AlaSecuredFilters {
             before = {
                 def controller = grailsApplication.getArtefactByLogicalPropertyName("Controller", controllerName)
                 Class cClazz = controller?.clazz
+
+                if (!cClazz) {
+                    return
+                }
+
                 String methodName = actionName ?: "index"
                 Method method = cClazz.getMethods().find { method -> method.name == methodName && Modifier.isPublic(method.getModifiers()) }
 
@@ -46,7 +51,10 @@ class AlaSecuredFilters {
                     }
 
                     if (error) {
-                        flash.errorMessage = sa?.message() ?: "Permission denied"
+                        if (sa.message()) {
+                            flash.errorMessage = sa.message()
+                        }
+
                         if (params.returnTo) {
                             redirect(url: params.returnTo)
                         } else {
