@@ -1,7 +1,6 @@
 package ala.web.theme
 
-
-
+import au.org.ala.web.theme.HeaderFooterTagLib
 import grails.test.mixin.*
 import org.junit.*
 

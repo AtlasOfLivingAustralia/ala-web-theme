@@ -1,7 +1,6 @@
 package ala.web.theme
 
-
-
+import au.org.ala.web.AuthService
 import grails.test.mixin.*
 import org.junit.*
 

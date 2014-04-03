@@ -1,3 +1,4 @@
+import au.org.ala.web.SecurityPrimitives
 import grails.util.Environment
 import grails.util.Holders
 
@@ -200,6 +201,10 @@ made to `ala.less` and then CSS files generated with provided script (see README
                 }
 
             }
+        }
+
+        securityPrimitives(SecurityPrimitives) { beanDefinition ->
+            beanDefinition.constructorArgs = [ref('authService'), ref('grailsApplication')]
         }
     }
 
