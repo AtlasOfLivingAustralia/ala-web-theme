@@ -145,11 +145,11 @@ class HttpWebService implements InitializingBean {
         } catch (SocketTimeoutException e) {
             def error = [error: "Timed out calling web service POST. URL= ${url}."]
             println error.error
-            return error as JSON
+            return error
         } catch (Exception e) {
             def error = [error: "Failed calling web service POST. ${e.getClass()} ${e.getMessage()} ${e} URL= ${url}."]
             println error.error
-            return error as JSON
+            return error
         }
     }
 }

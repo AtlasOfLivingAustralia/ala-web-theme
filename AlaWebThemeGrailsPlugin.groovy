@@ -185,6 +185,11 @@ made to `ala.less` and then CSS files generated with provided script (see README
             config.userDetails.path = "getUserListFull"
         }
 
+        if (!config.userDetailsById.path) {
+            config.userDetailsById.path = "getUserDetails"
+        }
+
+
         if (!config.grails.cache.config) {
             config.grails.cache.config = {
                 defaults {

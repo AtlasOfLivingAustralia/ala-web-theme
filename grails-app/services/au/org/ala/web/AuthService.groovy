@@ -1,8 +1,6 @@
 package au.org.ala.web
 
-import au.org.ala.cas.util.AuthenticationCookieUtils
 import au.org.ala.cas.util.AuthenticationUtils
-import org.apache.commons.lang.StringUtils
 import net.sf.json.JSONArray
 import net.sf.json.JSONObject
 import org.springframework.cache.annotation.Cacheable
@@ -16,7 +14,7 @@ class AuthService {
 
     def grailsApplication
     def userListService
-
+    def httpWebService
 
     def getEmail() {
         return AuthenticationUtils.getEmailAddress(RequestContextHolder.currentRequestAttributes().getRequest())
@@ -65,25 +63,33 @@ class AuthService {
         details
     }
 
+    @Cacheable("userDetailsCache")
     UserDetails getUserForUserId(String userId) {
-        // TODO: replace this implementation with web service call
-        Map<String, UserDetails> um = getAllUserNameMap()
-        UserDetails ud = null;
+        def results = httpWebService.doPost(grailsApplication.config.userDetails.url + grailsApplication.config.userDetailsById.path + "?userName=${userId}", "", "", "")
+        try {
 
-        if (um && um.containsKey(userId)) {
-            ud = um.get(userId)
+            if (!results.error) {
+                def ud = results.resp
+                if (ud?.userName && ud?.userId) {
+                    return new UserDetails(
+                        userId: ud.userId?.toString(),
+                        userName: ud.userName?.toString()?.toLowerCase(),
+                        displayName: "${ud.firstName ?: ""} ${ud.lastName ?: ""}".trim()
+                    )
+                }
+            } else {
+                log.warn("Failed to retrieve user details. Error message was: ${results.error}")
+            }
+        } catch (Exception ex) {
+            log.error("Exception caught trying get find user details for ${userId}.", ex)
+            return null
         }
-
-        return ud
     }
 
+    @Cacheable("userDetailsCache")
     UserDetails getUserForEmailAddress(String emailAddress) {
-        // TODO: replace this implementation with web service call
-        Map<String, UserDetails> um = getAllUserNameMap()
-
-        return um.values().find {
-            it.userName?.equalsIgnoreCase(emailAddress)
-        }
+        // The user details service lookup service should accept either a numerical id or email address and respond appropriately
+        return getUserForUserId(emailAddress)
     }
 
     Map<String, UserDetails> getAllUserNameMap() {
