@@ -82,8 +82,8 @@ class AuthService {
             }
         } catch (Exception ex) {
             log.error("Exception caught trying get find user details for ${userId}.", ex)
-            return null
         }
+        return null
     }
 
     @Cacheable("userDetailsCache")
