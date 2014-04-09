@@ -6,6 +6,7 @@ import org.codehaus.groovy.grails.commons.GrailsApplication
  * Created by bea18c on 31/03/2014.
  */
 class SecurityPrimitives {
+
     private final AuthService authService
     private final GrailsApplication grailsApplication
 

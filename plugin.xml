@@ -17,6 +17,7 @@ made to `ala.less` and then CSS files generated with provided script (see README
     <resource>au.org.ala.web.AuthService</resource>
     <resource>au.org.ala.web.HttpWebService</resource>
     <resource>au.org.ala.web.UserListService</resource>
+    <resource>au.org.ala.web.theme.AuthTagLib</resource>
     <resource>au.org.ala.web.theme.HeaderFooterTagLib</resource>
   </resources>
 </plugin>
