@@ -73,7 +73,6 @@ class AlaSecuredFilters {
                         }
                     }
                 }
-
             }
 
             after = { Map model ->

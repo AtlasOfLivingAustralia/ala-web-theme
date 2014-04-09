@@ -35,10 +35,8 @@ class SecurityPrimitives {
      * @param roles A list of roles to check
      */
     boolean isAnyGranted(Iterable<String> roles) {
-        fixAlaAdminRole(roles).collect { role ->
+        fixAlaAdminRole(roles).any { role ->
             authService.userInRole(role?.trim())
-        }.inject(false) { acc, val ->
-            acc || val
         }
     }
 
@@ -48,10 +46,8 @@ class SecurityPrimitives {
      * @param roles A list of roles to check
      */
     boolean isAllGranted(Iterable<String> roles) {
-        fixAlaAdminRole(roles).collect { role ->
+        fixAlaAdminRole(roles).every { role ->
             authService.userInRole(role?.trim())
-        }.inject(true) { acc, val ->
-            acc && val
         }
     }
 
@@ -72,11 +68,7 @@ class SecurityPrimitives {
     private Iterable<String> fixAlaAdminRole(Iterable<String> roles) {
         def adminRole = grailsApplication.config.security.cas.adminRole
         !adminRole ? roles : roles.collect { role ->
-            if (CASRoles.ROLE_ADMIN) {
-                return adminRole
-            } else {
-                return role
-            }
+            CASRoles.ROLE_ADMIN == role ? adminRole : role
         }
     }
 }

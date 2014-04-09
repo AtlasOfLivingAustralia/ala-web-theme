@@ -105,14 +105,19 @@ class SecurityPrimitivesSpec extends Specification {
         def security = new ConfigObject()
         security.put("cas", cas)
         mockConfig.put("security", security)
-        //mockConfig.put("security.cas.adminRole", "ROLE_MAGIC")
         mockAuthService.userInRole("ROLE_MAGIC") >> true
         mockAuthService.userInRole(!"ROLE_MAGIC") >> false
 
         when:
         def replaced = secPrim.isAllGranted([CASRoles.ROLE_ADMIN])
+        def anyReplaced = secPrim.isAnyGranted([CASRoles.ROLE_ADMIN, ROLE_POTATO])
+        def notReplacedPos = secPrim.isNotGranted([ROLE_POTATO])
+        def notReplacedNeg = secPrim.isNotGranted([CASRoles.ROLE_ADMIN])
 
         then:
         replaced == true
+        anyReplaced == true
+        notReplacedPos == true
+        notReplacedNeg == false
     }
 }
