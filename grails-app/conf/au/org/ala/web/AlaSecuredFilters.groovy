@@ -19,7 +19,7 @@ class AlaSecuredFilters {
                 Class cClazz = controller?.clazz
 
                 if (!cClazz) {
-                    return
+                    return true
                 }
 
                 String methodName = actionName ?: "index"
@@ -71,8 +71,10 @@ class AlaSecuredFilters {
                             }
                             redirect(controller: redirectController, action: sa.redirectAction())
                         }
+                        return false
                     }
                 }
+                return true
             }
 
             after = { Map model ->
