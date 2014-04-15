@@ -26,7 +26,7 @@ made to `ala.less` and then CSS files generated with provided script (see README
     def documentation = "http://code.google.com/p/ala/wiki/AlaWebTheme"
 
     // License: one of 'APACHE', 'GPL2', 'GPL3'
-    def license = "MOZILLA"
+    def license = "MPL2"
 
     // Details of company behind the plugin (if there is one)
     def organization = [ name: "Atlas of Living Australia", url: "http://www.ala.org.au/" ]
