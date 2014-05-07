@@ -4,7 +4,7 @@ import grails.util.Holders
 
 class AlaWebThemeGrailsPlugin {
     // the plugin version
-    def version = "0.3"
+    def version = "0.4"
     // the version or versions of Grails the plugin is designed for
     def grailsVersion = "2.1 > *"
     // the other plugins this plugin depends on
@@ -40,22 +40,14 @@ made to `ala.less` and then CSS files generated with provided script (see README
     // Online location of the plugin's browseable source code.
     def scm = [ url: "http://code.google.com/p/ala/source/browse/trunk/ala-web-theme" ]
 
+    // Note: ONLY evaluated at compile time (not run time)
     def doWithWebDescriptor = { xml ->
         def mappingElement = xml.'context-param'
         def lastMapping = mappingElement[mappingElement.size()-1]
         String defaultConfig = Holders.config.default_config
 
-        if (new File(defaultConfig).exists()) {
-            // Use `configPropFile` external config which is read by ala-cas-client-2.0-SNAPSHOT.jar
-            lastMapping + {
-                'env-entry' {
-                    'env-entry-name' ('configPropFile')
-                    'env-entry-value' (defaultConfig)
-                    'env-entry-type' ('java.lang.String')
-                }
-            }
-        } else {
-            // default_config file not found - use security.cas.* settings instead
+        if (Holders.config.runWithNoExternalConfig == true) {
+            // No external config file set, use security.cas.* settings embedded un web.xml instead
             if (!Holders.config.security.cas || Holders.config.security.cas.size() == 0) {
                 println "No security.cas.* settings found (or external conf found) - setting bypass = true"
                 Holders.config.security.cas.bypass = true
@@ -90,6 +82,15 @@ made to `ala.less` and then CSS files generated with provided script (see README
                         'param-name' ('contextPath')
                         'param-value' (Holders.config.security.cas.contextPath)
                     }
+                }
+            }
+        } else {
+            // Use `configPropFile` external config which is read by ala-cas-client-2.0-SNAPSHOT.jar
+            lastMapping + {
+                'env-entry' {
+                    'env-entry-name' ('configPropFile')
+                    'env-entry-value' (defaultConfig)
+                    'env-entry-type' ('java.lang.String')
                 }
             }
         }
