@@ -175,6 +175,11 @@ class HeaderFooterTagLib {
         def casLoginUrl = attrs.casLoginUrl ?: casLoginUrl
         def casLogoutUrl = attrs.casLogoutUrl ?: casLogoutUrl
 
+        if (request.queryString) {
+            loginReturnToUrl += "?" + URLEncoder.encode(request.queryString, "UTF-8")
+            logoutReturnToUrl += "?" + URLEncoder.encode(request.queryString, "UTF-8")
+        }
+
         if ((attrs.ignoreCookie != "true" &&
                 AuthenticationCookieUtils.cookieExists(request, AuthenticationCookieUtils.ALA_AUTH_COOKIE)) ||
                 request.userPrincipal) {
