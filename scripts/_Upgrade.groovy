@@ -9,4 +9,6 @@
 //    ant.mkdir(dir:"${basedir}/grails-app/jobs")
 //
 
-evaluate(new File("_Install.groovy"))
+//evaluate(new File("_Install.groovy"))
+
+ant.echo("NOTE: Please copy the plugin file: 'layouts/main.gsp' into your local app and check for changed against your local copy, as it may have changed")

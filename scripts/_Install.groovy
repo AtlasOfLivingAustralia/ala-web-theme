@@ -11,41 +11,41 @@
 // backup original project files
 //ant.echo("Backing-up project files: index.gsp and layouts/main.gsp")
 // copy over plugin files
-//ant.echo("Copying over plugin files: index.gsp and layouts/main.gsp")
+ant.echo("NOTE: Please copy the plugin file: 'layouts/main.gsp' into your local app")
 
-try {
-    File layoutFile = new File(new File(new File(basedir, "grails-app"), "views/layouts"), "main.gsp")
-    def toLayoutFile =  "${basedir}/grails-app/views/layouts/main.gsp"
-    File indexFile = new File(new File(new File(basedir, "grails-app"), "views"), "index.gsp")
-    def toIndexFile =  "${basedir}/grails-app/views/index.gsp"
-
-    if (layoutFile.exists()) {
-        toLayoutFile += ".new"
-    }
-    if (indexFile.exists()) {
-        toIndexFile += ".new"
-    }
-    if (!(layoutFile.exists() && indexFile.exists())) {
-        // assume first time installation - backup original files first
-        if (layoutFile.exists()) {
-            ant.copy(file: "${basedir}/grails-app/views/layouts/main.gsp",
-                    toFile: "${basedir}/grails-app/views/layouts/main.gsp.bak")
-        }
-        if (indexFile.exists()) {
-            ant.copy(file: "${basedir}/grails-app/views/index.gsp",
-                    toFile: "${basedir}/grails-app/views/index.gsp.bak")
-        }
-    }
-
-//layout file
-    ant.copy(file: "${pluginBasedir}/grails-app/views/layouts/main.gsp",
-             toFile: toLayoutFile,
-             overwrite: true)
-// index file
-    ant.copy(file: "${pluginBasedir}/grails-app/views/index.gsp",
-             toFile: toIndexFile,
-             overwrite: true)
-
-} catch (Exception ex) {
-    ant.echo("Error running install script: " + ex.message)
-}
+//try {
+//    File layoutFile = new File(new File(new File(basedir, "grails-app"), "views/layouts"), "main.gsp")
+//    def toLayoutFile =  "${basedir}/grails-app/views/layouts/main.gsp"
+//    File indexFile = new File(new File(new File(basedir, "grails-app"), "views"), "index.gsp")
+//    def toIndexFile =  "${basedir}/grails-app/views/index.gsp"
+//
+//    if (layoutFile.exists()) {
+//        toLayoutFile += ".new"
+//    }
+//    if (indexFile.exists()) {
+//        toIndexFile += ".new"
+//    }
+//    if (!(layoutFile.exists() && indexFile.exists())) {
+//        // assume first time installation - backup original files first
+//        if (layoutFile.exists()) {
+//            ant.copy(file: "${basedir}/grails-app/views/layouts/main.gsp",
+//                    toFile: "${basedir}/grails-app/views/layouts/main.gsp.bak")
+//        }
+//        if (indexFile.exists()) {
+//            ant.copy(file: "${basedir}/grails-app/views/index.gsp",
+//                    toFile: "${basedir}/grails-app/views/index.gsp.bak")
+//        }
+//    }
+//
+////layout file
+//    ant.copy(file: "${pluginBasedir}/grails-app/views/layouts/main.gsp",
+//             toFile: toLayoutFile,
+//             overwrite: true)
+//// index file
+//    ant.copy(file: "${pluginBasedir}/grails-app/views/index.gsp",
+//             toFile: toIndexFile,
+//             overwrite: true)
+//
+//} catch (Exception ex) {
+//    ant.echo("Error running install script: " + ex.message)
+//}
