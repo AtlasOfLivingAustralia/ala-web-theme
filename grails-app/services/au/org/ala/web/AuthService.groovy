@@ -92,6 +92,10 @@ class AuthService {
         return getUserForUserId(emailAddress)
     }
 
+    /**
+     * @deprecated - use a lookup service e.g. getUserForEmailAddress()
+     * @return
+     */
     Map<String, UserDetails> getAllUserNameMap() {
         def userListMap = [:]
 
@@ -119,6 +123,10 @@ class AuthService {
     }
 
 
+    /**
+     * @deprecated - use a lookup service e.g. getUserForEmailAddress()
+     * @return
+     */
     def getAllUserNameList() {
         def userList = []
         try {
