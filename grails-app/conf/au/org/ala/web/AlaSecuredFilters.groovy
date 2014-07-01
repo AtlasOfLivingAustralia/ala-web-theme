@@ -43,7 +43,7 @@ class AlaSecuredFilters {
                             error = true
                         } else if (sa.notRoles() && !securityPrimitives.isNotGranted(roles)) {
                             error = true
-                        } else if (!securityPrimitives.isAllGranted(roles)) {
+                        } else if (!sa.anyRole() && !securityPrimitives.isAllGranted(roles)) {
                             error = true
                         }
                     } else {
