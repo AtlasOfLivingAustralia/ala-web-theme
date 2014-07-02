@@ -112,8 +112,14 @@ class AuthService {
                     def userDetails = new UserDetails(userId: user.id, displayName: "${user.firstName} ${user.lastName}", userName: user.userName)
                     userListMap.put(String.valueOf(user.id), userDetails);
                 }
+            } else if (userListJson instanceof ArrayList) {
+                // works with path = getUserListFull
+                userListJson.eachWithIndex { user, i ->
+                    def userDetails = new UserDetails(userId: user.id, displayName: "${user.firstName} ${user.lastName}", userName: user.userName)
+                    userListMap.put(user.userName?.toLowerCase(), userDetails); // username as key (email address)
+                }
             } else {
-                log.info "error -  " + userListJson.getClass() + ": ${userListJson}"
+                log.info "error -  ${userListJson.getClass()}" // + ": ${userListJson}"
             }
         } catch (Exception e) {
             log.error "Cache refresh error: " + e.message, e

@@ -18,7 +18,7 @@ class UserListService {
     def httpWebService, grailsApplication
 
     @Cacheable("userListCache")
-    JSONArray getFullUserList() {
+    def getFullUserList() {
         checkConfig()
         try {
             return httpWebService.doJsonPost(grailsApplication.config.userDetails.url, grailsApplication.config.userDetails.path, "", "")
