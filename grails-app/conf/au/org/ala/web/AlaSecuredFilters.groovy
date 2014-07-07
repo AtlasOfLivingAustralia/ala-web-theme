@@ -26,7 +26,7 @@ class AlaSecuredFilters {
                 Method method = cClazz.getMethods().find { method -> method.name == methodName && Modifier.isPublic(method.getModifiers()) }
 
                 AlaSecured ca = cClazz.getAnnotation(AlaSecured)
-                AlaSecured ma = method.getAnnotation(AlaSecured)
+                AlaSecured ma = method?.getAnnotation(AlaSecured)
                 AlaSecured sa = ma ?: ca
                 if (sa) {
 
