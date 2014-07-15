@@ -8,7 +8,7 @@ import java.lang.annotation.*;
  *
  * @author Simon Bear (simon.bear@csiro.au)
  */
-@Target({ElementType.TYPE, ElementType.METHOD})
+@Target({ElementType.TYPE, ElementType.METHOD, ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 @Inherited

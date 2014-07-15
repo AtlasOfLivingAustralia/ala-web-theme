@@ -23,27 +23,48 @@ class AlaSecuredFilters {
                 }
 
                 String methodName = actionName ?: "index"
+                // The action annotation may be applied to either a method or a property
+                AlaSecured actionAnnotation = null
+                // Look for a method on the controller whose name matches the action...
                 Method method = cClazz.getMethods().find { method -> method.name == methodName && Modifier.isPublic(method.getModifiers()) }
 
-                AlaSecured ca = cClazz.getAnnotation(AlaSecured)
-                AlaSecured ma = method?.getAnnotation(AlaSecured)
-                AlaSecured sa = ma ?: ca
-                if (sa) {
+                if (method) {
+                    actionAnnotation = method.getAnnotation(AlaSecured)
+                } else {
+                    // if a method could not be found, look for a property (private field) on the class, for when actions are declared in this style:
+                    // def action = { ... }
+                    def field = cClazz.declaredFields.find { it.name == methodName }
+                    // If a field could not be found, it may be a spring web flow action, so look for that (name suffixed with "Flow")...
+                    if (!field) {
+                        def target = "${methodName}Flow"
+                        field = cClazz.declaredFields.find { it.name == target }
+                    }
+
+                    if (field) {
+                        actionAnnotation = field.getAnnotation(AlaSecured)
+                    }
+                }
+
+                // Action annotations trump class annotations
+                AlaSecured classAnnotation = cClazz.getAnnotation(AlaSecured)
+                AlaSecured effectiveAnnotation = actionAnnotation ?: classAnnotation
+
+                if (effectiveAnnotation) {
 
                     boolean error = false
 
-                    if (sa.value()) {
-                        if (sa.anyRole() && sa.notRoles()) {
+                    if (effectiveAnnotation.value()) {
+                        if (effectiveAnnotation.anyRole() && effectiveAnnotation.notRoles()) {
                             throw new IllegalArgumentException("Only one of anyRole and notRoles should be specified")
                         }
 
-                        def roles = sa.value().toList()
+                        def roles = effectiveAnnotation.value().toList()
 
-                        if (sa.anyRole() && !securityPrimitives.isAnyGranted(roles)) {
+                        if (effectiveAnnotation.anyRole() && !securityPrimitives.isAnyGranted(roles)) {
                             error = true
-                        } else if (sa.notRoles() && !securityPrimitives.isNotGranted(roles)) {
+                        } else if (effectiveAnnotation.notRoles() && !securityPrimitives.isNotGranted(roles)) {
                             error = true
-                        } else if (!sa.anyRole() && !securityPrimitives.isAllGranted(roles)) {
+                        } else if (!effectiveAnnotation.anyRole() && !securityPrimitives.isAllGranted(roles)) {
                             error = true
                         }
                     } else {
@@ -51,25 +72,25 @@ class AlaSecuredFilters {
                     }
 
                     if (error) {
-                        if (sa.message()) {
-                            flash.errorMessage = sa.message()
+                        if (effectiveAnnotation.message()) {
+                            flash.errorMessage = effectiveAnnotation.message()
                         }
 
                         if (params.returnTo) {
                             redirect(url: params.returnTo)
-                        } else if (sa.statusCode() != 0) {
-                            render(status: sa.statusCode())
-                        } else if (sa.redirectUri()) {
-                            redirect(uri: sa.redirectUri())
+                        } else if (effectiveAnnotation.statusCode() != 0) {
+                            render(status: effectiveAnnotation.statusCode())
+                        } else if (effectiveAnnotation.redirectUri()) {
+                            redirect(uri: effectiveAnnotation.redirectUri())
                         } else {
-                            def redirectController =  sa.redirectController()
+                            def redirectController =  effectiveAnnotation.redirectController()
                             if (!redirectController) {
-                                if (!ma) {
+                                if (!actionAnnotation) {
                                     log.warn('Redirecting to the current controller with a Controller level @AlaSecured, this is likely to result in a redirect loop!')
                                 }
                                 redirectController = controllerName
                             }
-                            redirect(controller: redirectController, action: sa.redirectAction())
+                            redirect(controller: redirectController, action: effectiveAnnotation.redirectAction())
                         }
                         return false
                     }
