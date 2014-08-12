@@ -6,6 +6,7 @@ grails.project.work.dir = "target"
 grails.project.target.level = 1.6
 grails.project.source.level = 1.6
 
+grails.project.dependency.resolver = "maven" // or ivy
 grails.project.dependency.resolution = {
     //legacyResolve true // if using Grails > 2.2
     // inherit Grails' default dependencies
@@ -39,14 +40,14 @@ grails.project.dependency.resolution = {
     }
 
     plugins {
-        runtime ":jquery:1.7.1"
-        runtime ":resources:1.2.1"
+        runtime ":jquery:1.11.0.2"
+        runtime ":resources:1.2.8"
         compile(":tomcat:7.0.54",
                 ":release:3.0.1") {
             export = false
         }
-        compile ":cache-ehcache:1.0.0"
-        compile ":rest:0.7"
+        compile ":cache-ehcache:1.0.2"
+        compile ":rest:0.8"
         compile ":svn:1.0.2"
     }
 }
