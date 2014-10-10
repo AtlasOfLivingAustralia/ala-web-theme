@@ -1,4 +1,4 @@
-<plugin name='ala-web-theme' version='0.7' grailsVersion='2.1 &gt; *'>
+<plugin name='ala-web-theme' version='0.8.2' grailsVersion='2.1 &gt; *'>
   <author>Nick dos Remedios</author>
   <authorEmail>nick.dosremedios@csiro.au</authorEmail>
   <title>Ala Web Theme Plugin</title>

@@ -6,6 +6,7 @@ import au.org.ala.cas.util.AuthenticationCookieUtils
 class HeaderFooterTagLib {
 
     static namespace = 'hf'     // namespace for headers and footers
+    static returnObjectForTags = ['createLoginUrl']
     def grailsApplication
 
     /**
@@ -100,6 +101,22 @@ class HeaderFooterTagLib {
     def loginLogout = { attrs ->
         out << buildLoginoutLink(attrs)
     }
+
+    /**
+     * Generate a URL for logging in the user\. Generally used as a method call
+     * rather than a tag eg.<br/>
+     *
+     * &lt;a href="${createLoginUrl()}"&gt;log in&lt;/a&gt;
+     *
+     * @emptyTag
+     *
+     * @attr casLoginUrl - defaults to {CH.config.security.cas.loginUrl}
+     * @attr loginReturnToUrl where to go after logging in - defaults to current page
+     */
+    Closure createLoginUrl = { attrs ->
+        String loginUrl = buildLoginLink(attrs)
+        return loginUrl
+    }
     /**
      * Get the content from cache of the web.
      * @param which specifies the include
@@ -170,13 +187,11 @@ class HeaderFooterTagLib {
     String buildLoginoutLink(attrs) {
         def requestUri = removeContext(grailServerURL) + request.forwardURI
         def logoutUrl = attrs.logoutUrl ?: grailServerURL + "/session/logout"
-        def loginReturnToUrl = attrs.loginReturnToUrl ?: requestUri
         def logoutReturnToUrl = attrs.logoutReturnToUrl ?: requestUri
-        def casLoginUrl = attrs.casLoginUrl ?: casLoginUrl
         def casLogoutUrl = attrs.casLogoutUrl ?: casLogoutUrl
 
+        // TODO should this be attrs.logoutReturnToUrl?
         if (!attrs.loginReturnToUrl && request.queryString) {
-            loginReturnToUrl += "?" + URLEncoder.encode(request.queryString, "UTF-8")
             logoutReturnToUrl += "?" + URLEncoder.encode(request.queryString, "UTF-8")
         }
 
@@ -189,8 +204,20 @@ class HeaderFooterTagLib {
                     "class='${attrs.cssClass}'>Logout</a>"
         } else {
             // currently logged out
-            return "<a href='${casLoginUrl}?service=${loginReturnToUrl}' class='${attrs.cssClass}'><span>Log in</span></a>"
+            return "<a href='${buildLoginLink(attrs)}' class='${attrs.cssClass}'><span>Log in</span></a>"
         }
+    }
+
+    /**
+     * Build the login link
+     * @param attrs any specified params to override defaults
+     * @return The login url
+     */
+    String buildLoginLink(attrs) {
+        def casLoginUrl = attrs.casLoginUrl ?: casLoginUrl
+        def loginReturnToUrl = attrs.loginReturnToUrl ?: (removeContext(grailServerURL) + request.forwardURI + (request.queryString ? "?" + URLEncoder.encode(request.queryString, "UTF-8") : ""))
+        String loginUrl = "${casLoginUrl}?service=${loginReturnToUrl}"
+        return loginUrl
     }
 
     /**

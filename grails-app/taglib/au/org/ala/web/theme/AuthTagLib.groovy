@@ -12,14 +12,14 @@ class AuthTagLib {
      * Is the user logged in?
      */
     def ifLoggedIn = { attrs, body ->
-        if (securityPrimitives.loggedIn) out << body()
+        if (securityPrimitives.isLoggedIn(request)) out << body()
     }
 
     /**
      * Is the user not logged in?
      */
-    def ifNotLoggedIn = {
-        if (securityPrimitives.notLoggedIn) out << body()
+    def ifNotLoggedIn = { attrs, body ->
+        if (securityPrimitives.isNotLoggedIn(request)) out << body()
     }
 
     /**
