@@ -18,8 +18,7 @@ before_script:
 - mkdir -p ~/.grails; wget -q -O ~/.grails/settings.groovy https://raw.githubusercontent.com/AtlasOfLivingAustralia/travis-build-configuration/master/travis_grails_settings_new.groovy
 - MAVEN_REPO="ala-repo-snapshot"; grep '^app\.version=' ./application.properties |
   grep -q "\-SNAPSHOT"; if [ "$?" = "1" ]; then MAVEN_REPO="ala-repo-release"; fi;
-script: grails clean && grails refresh-dependencies --non-interactive && grails prod
-  war --non-interactive && grails prod maven-deploy --repository=$MAVEN_REPO --non-interactive
+script: grails clean && grails refresh-dependencies --non-interactive && grails prod maven-deploy --repository=$MAVEN_REPO --non-interactive
 env:
   global:
   - secure: LIwESDMQ4Jj7meFdYuNi2XOGV8I/ubtYznQyoHh1JgRvksI8oGoYvG1iZYuewvt6iydDFSxuLl5IvzfJyr0LXkBbKHKwOxAtuxAMmZW5NPZMF7kcECx6mRxEaMNJ4f0A9gac5RIuOhMf79GOSMr3CuodUY3BnA5siqqq7T2jO6k=
