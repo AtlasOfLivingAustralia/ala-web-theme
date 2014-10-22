@@ -1,8 +1,6 @@
 modules = {
     core {
         dependsOn 'jquery'
-        resource url: "${grailsApplication.config.ala.baseURL?:'http://www.ala.org.au'}/wp-content/themes/ala2011/css/jquery.autocomplete.css"
-        resource url: "${grailsApplication.config.ala.baseURL?:'http://www.ala.org.au'}/wp-content/themes/ala2011/scripts/jquery.autocomplete.js", disposition: 'head'
         resource url: [dir:'js', file:'html5.js', plugin: "ala-web-theme"], wrapper: { s -> "<!--[if lt IE 9]>$s<![endif]-->" }, disposition: 'head'
     }
 
@@ -13,7 +11,15 @@ modules = {
         resource url:[dir:'css', file:'bootstrap-responsive.css', plugin: 'ala-web-theme'], attrs:[media:'screen', id:'responsiveCss']
     }
 
+    jqueryui {
+        dependsOn "jquery"
+        resource url:'js/jquery-ui-1.9.2.custom.min.js'
+        resource url:'css/jquery-ui/ui-lightness/jquery-ui-1.9.2.custom.min.css'
+        resource url:'css/ala-autocomplete.css'
+    }
+
     application {
         // implement in client app
     }
+
 }
