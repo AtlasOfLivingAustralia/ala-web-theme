@@ -45,7 +45,7 @@ class AuthService {
         def inRole = AuthenticationUtils.isUserInRole(RequestContextHolder.currentRequestAttributes().getRequest(), role)
         def bypass = grailsApplication.config.security.cas.bypass
         log.debug("userInRole(${role}) - ${inRole} (bypassing CAS - ${bypass})")
-        return bypass || inRole
+        return bypass as Boolean || inRole
     }
 
     def userDetails() {

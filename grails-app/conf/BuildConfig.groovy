@@ -6,6 +6,8 @@ grails.project.work.dir = "target"
 grails.project.target.level = 1.6
 grails.project.source.level = 1.6
 
+grails.project.dependency.resolver = "maven"
+
 grails.project.dependency.resolution = {
     //legacyResolve true // if using Grails > 2.2
     // inherit Grails' default dependencies
@@ -14,19 +16,12 @@ grails.project.dependency.resolution = {
         // excludes 'ehcache'
     }
     log "warn" // log level of Ivy resolver, either 'error', 'warn', 'info', 'debug' or 'verbose'
+
     repositories {
-        grailsCentral()
-        // uncomment the below to enable remote dependency resolution
-        // from public Maven repositories
         mavenLocal()
-        mavenCentral()
-        //mavenRepo "http://snapshots.repository.codehaus.org"
-        //mavenRepo "http://repository.codehaus.org"
-        //mavenRepo "http://download.java.net/maven/2/"
-        //mavenRepo "http://repository.jboss.com/maven2/"
-        mavenRepo "http://maven.ala.org.au/repository"
-        mavenRepo "http://maven.tmatesoft.com/content/repositories/releases/"
+        mavenRepo "http://nexus.ala.org.au/content/groups/public/"
     }
+
     dependencies {
         // specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes eg.
         // runtime 'mysql:mysql-connector-java:5.1.18'
@@ -47,7 +42,9 @@ grails.project.dependency.resolution = {
             export = false
         }
         compile ":cache-ehcache:1.0.0"
-        compile ":rest:0.7"
+        compile (":rest:0.7") {
+            exclude "servlet-api"
+        }
         compile ":svn:1.0.2"
     }
 }
