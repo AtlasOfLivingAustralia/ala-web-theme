@@ -31,19 +31,23 @@ grails.project.dependency.resolution = {
                 transitive:false
         compile 'org.jasig.cas.client:cas-client-core:3.1.12'
         compile "org.tmatesoft.svnkit:svnkit:1.8.5"
+        compile("org.codehaus.groovy.modules.http-builder:http-builder:0.7.1") {
+            excludes "groovy"
+        }
     }
 
     plugins {
-        build ":release:3.0.1"
-        runtime ":jquery:1.7.1"
-        runtime ":resources:1.2.1"
-        compile(":tomcat:7.0.54",
-                ":release:3.0.1") {
+
+        build(":release:3.0.1",
+                ":rest-client-builder:1.0.3") {
             export = false
         }
+        runtime ":jquery:1.7.1"
+        runtime ":resources:1.2.1"
         compile ":cache-ehcache:1.0.0"
         compile (":rest:0.7") {
             exclude "servlet-api"
+            exclude "http-builder"
         }
         compile ":svn:1.0.2"
     }
