@@ -4,7 +4,7 @@ import grails.util.Holders
 
 class AlaWebThemeGrailsPlugin {
     // the plugin version
-    def version = "0.8.3"
+    def version = "0.8.4-SNAPSHOT"
     // the version or versions of Grails the plugin is designed for
     def grailsVersion = "2.1 > *"
     // the other plugins this plugin depends on
