@@ -35,10 +35,10 @@ made to `ala.less` and then CSS files generated with provided script (see README
     def developers = [ [ name: "Nick dos Remedios", email: "nick.dosremedios@csiro.au" ], [ name: "Dave Martin", email: "david.martin@csiro.au" ]]
 
     // Location of the plugin's issue tracker.
-    def issueManagement = [ system: "Google Code", url: "http://code.google.com/p/ala/issues/list" ]
+    def issueManagement = [ system: "github", url: "https://github.com/AtlasOfLivingAustralia/ala-web-theme/issues" ]
 
     // Online location of the plugin's browseable source code.
-    def scm = [ url: "http://code.google.com/p/ala/source/browse/trunk/ala-web-theme" ]
+    def scm = [ url: "https://github.com/AtlasOfLivingAustralia/ala-web-theme" ]
 
     // Note: ONLY evaluated at compile time (not run time)
     def doWithWebDescriptor = { xml ->
