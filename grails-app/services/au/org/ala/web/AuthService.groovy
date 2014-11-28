@@ -122,10 +122,11 @@ class AuthService {
     def getUserDetailsById(List<String> userIds) {
         //def json = ([userIds: userIds] as JSON).toString()
         def json = Gson.newInstance().toJson([userIds: userIds])  // above doesn't work in unit tests :(
-        def results = httpWebService.doPost(grailsApplication.config.userDetails.url + grailsApplication.config.bulkUserDetailsById.path, '', '', json, 'application/json')
+        def results = httpWebService.doPost(grailsApplication.config.userDetails.url + grailsApplication.config.userDetailsById.bulkPath, '', '', json, 'application/json')
         try {
             if (!results.error) {
-                return [users: results.users.collectEntries { [("${it.key}".toString()) :createUserDetailsFromJson(it.value)] }, invalidIds: results.invalidIds.collect { it }, success: results.success ]
+                def resp = results.resp
+                return [users: resp.users.collectEntries { [(it.key) :createUserDetailsFromJson(it.value)] }, invalidIds: resp.invalidIds.collect { it }, success: resp.success ]
             } else {
                 log.warn("Failed to retrieve bulk user details.  Error message was: ${results.error}")
             }

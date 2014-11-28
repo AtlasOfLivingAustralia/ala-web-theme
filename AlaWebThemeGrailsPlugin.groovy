@@ -190,6 +190,10 @@ made to `ala.less` and then CSS files generated with provided script (see README
             config.userDetailsById.path = "getUserDetails"
         }
 
+        if (!config.userDetailsById.bulkPath) {
+            config.userDetailsById.bulkPath = 'getUserDetailsFromIdList'
+        }
+
 
         if (!config.grails.cache.config) {
             config.grails.cache.config = {
