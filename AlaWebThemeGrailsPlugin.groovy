@@ -1,4 +1,3 @@
-import au.org.ala.web.SecurityPrimitives
 import grails.util.Environment
 import grails.util.Holders
 
