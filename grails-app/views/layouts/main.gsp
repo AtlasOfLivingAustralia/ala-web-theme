@@ -13,13 +13,13 @@
     <title><g:layoutTitle /></title>
 
 <%-- Do not include JS & CSS files here - add them to your app's "application" module (in "Configuration/ApplicationResources.groovy") --%>
-    <r:require modules="bootstrap, application"/>
+    <r:require modules="bootstrap"/>
 
-    <r:script disposition='head'>
+    <r:script>
         // initialise plugins
-        jQuery(function(){
+        $(function(){
             // autocomplete on navbar search input
-            jQuery("form#search-form-2011 input#search-2011, form#search-inpage input#search, input#search-2013").autocomplete('http://bie.ala.org.au/search/auto.jsonp', {
+            $("form#search-form-2011 input#search-2011, form#search-inpage input#search, input#search-2013").autocomplete('http://bie.ala.org.au/search/auto.jsonp', {
                 extraParams: {limit: 100},
                 dataType: 'jsonp',
                 parse: function(data) {

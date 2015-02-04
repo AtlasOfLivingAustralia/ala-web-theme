@@ -1,7 +1,4 @@
 grails.servlet.version = "2.5"
-//grails.project.class.dir = "target/classes"
-//grails.project.test.class.dir = "target/test-classes"
-//grails.project.test.reports.dir = "target/test-reports"
 grails.project.work.dir = "target"
 grails.project.target.level = 1.6
 grails.project.source.level = 1.6
@@ -19,7 +16,9 @@ grails.project.dependency.resolution = {
 
     repositories {
         mavenLocal()
-        mavenRepo "http://nexus.ala.org.au/content/groups/public/"
+        mavenRepo ("http://nexus.ala.org.au/content/groups/public/") {
+            updatePolicy 'always'
+        }
     }
 
     dependencies {
@@ -42,7 +41,7 @@ grails.project.dependency.resolution = {
                 ":rest-client-builder:1.0.3") {
             export = false
         }
-        runtime ":jquery:1.7.1"
+        runtime ":jquery:1.11.1"
         runtime ":resources:1.2.1"
         compile ":cache-ehcache:1.0.0"
         compile (":rest:0.7") {
