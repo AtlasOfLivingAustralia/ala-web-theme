@@ -1,3 +1,5 @@
+import grails.util.Environment
+
 grails.servlet.version = "2.5"
 grails.project.work.dir = "target"
 grails.project.target.level = 1.6
@@ -33,6 +35,7 @@ grails.project.dependency.resolution = {
         compile("org.codehaus.groovy.modules.http-builder:http-builder:0.7.1") {
             excludes "groovy"
         }
+        compile 'com.yahoo.platform.yui:yuicompressor:2.4.8'
     }
 
     plugins {
@@ -42,7 +45,13 @@ grails.project.dependency.resolution = {
             export = false
         }
         runtime ":jquery:1.11.1"
-        runtime ":resources:1.2.1"
+        runtime ':resources:1.2.14'
+        if (Environment.current == Environment.PRODUCTION) {
+            runtime ":zipped-resources:1.0.1"
+            runtime ":cached-resources:1.1"
+            compile ":cache-headers:1.1.7"
+            runtime ":yui-minify-resources:0.1.5"
+        }
         compile ":cache-ehcache:1.0.0"
         compile (":rest:0.7") {
             exclude "servlet-api"

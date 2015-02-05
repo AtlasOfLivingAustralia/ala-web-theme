@@ -5,7 +5,7 @@
 stacktrace.log
 /*.zip
 /*.zip.sha1
-/plugin.xml
+plugin.xml
 /*.log
 /*DB.*
 /cobertura.ser
