@@ -25,11 +25,11 @@ grails.project.dependency.resolution = {
     dependencies {
         // specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes eg.
         // runtime 'mysql:mysql-connector-java:5.1.18'
-        compile group: 'au.org.ala',
-                name: 'ala-cas-client',
-                version:'2.2',
-                transitive:false
-        compile 'org.jasig.cas.client:cas-client-core:3.1.12'
+        //compile group: 'au.org.ala',
+        //        name: 'ala-cas-client',
+        //        version:'2.2',
+        //        transitive:false
+        //compile 'org.jasig.cas.client:cas-client-core:3.1.12'
         compile "org.tmatesoft.svnkit:svnkit:1.8.5"
         compile("org.codehaus.groovy.modules.http-builder:http-builder:0.7.1") {
             excludes "groovy"
@@ -50,6 +50,7 @@ grails.project.dependency.resolution = {
             exclude "http-builder"
         }
         compile ":svn:1.0.2"
+        compile ':ala-auth:1.3.4'
     }
 }
 
